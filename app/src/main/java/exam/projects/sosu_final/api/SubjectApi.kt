@@ -17,6 +17,12 @@ interface SubjectApi {
     @POST("subjects")
     suspend fun addSubject(@Body subjectDto: SubjectDto): Response<SubjectDto>
 
+    @GET("subjects/{subjectId}/general-information")
+    suspend fun getAllGeneralInformation(@Path("subjectId") subjectId: String): Response<List<GeneralInformation>>
+
+    @GET("subjects/{subjectId}/general-information/{generalInformationId}")
+    suspend fun getOneGeneralInformation(@Path("subjectId") subjectId: String, @Path("generalInformationId") generalInformationId: String): Response<GeneralInformation>
+
     @PATCH("subjects/{subjectId}/general-information/{generalInformationId}")
     suspend fun updateGeneralInformation(@Path("subjectId") subjectId: String, @Path("generalInformationId") generalInformationId: String, @Body generalInformationDto: GeneralInformationDto): Response<GeneralInformationDto>
 }

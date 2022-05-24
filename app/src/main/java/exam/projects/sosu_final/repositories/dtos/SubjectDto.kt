@@ -1,9 +1,9 @@
 package exam.projects.sosu_final.repositories.dtos
 
 data class SubjectDto(
-    val firstName: String,
-    val lastName: String,
-    val email: String,
-    val phone: String,
-    val address: AddressDto,
+    var firstName: String,
+    var lastName: String,
+    var email: String,
+    var phone: String,
+    var address: AddressDto,
 )

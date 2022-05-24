@@ -7,4 +7,7 @@
     <string name="add_subject">Tilføj borger</string>
     <string name="general_information">Generelle Oplysninger</string>
     <string name="health_condition">Helbredstilstand</string>
+    <string name="title">Titel</string>
+    <string name="hint_comment">Kommentar</string>
+    <string name="save">Gem</string>
 </resources>

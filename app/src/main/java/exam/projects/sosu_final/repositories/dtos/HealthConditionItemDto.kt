@@ -1,7 +1,7 @@
 package exam.projects.sosu_final.repositories.dtos
 
 data class HealthConditionItemDto(
-    val comment: String,
-    val reason: String,
-    val relevant: String,
+    var comment: String,
+    var reason: String,
+    var relevant: String,
 )

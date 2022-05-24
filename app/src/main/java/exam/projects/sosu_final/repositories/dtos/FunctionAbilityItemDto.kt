@@ -1,10 +1,10 @@
 package exam.projects.sosu_final.repositories.dtos
 
 data class FunctionAbilityItemDto(
-    val currentLevel: String,
-    val execution: String,
-    val expectedLevel: String,
-    val meaningOfExecution: String,
-    val note: String,
-    val subjectWish: String,
+    var currentLevel: String,
+    var execution: String,
+    var expectedLevel: String,
+    var meaningOfExecution: String,
+    var note: String,
+    var subjectWish: String,
 )

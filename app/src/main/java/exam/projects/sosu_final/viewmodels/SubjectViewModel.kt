@@ -8,6 +8,7 @@ import exam.projects.sosu_final.repositories.entities.Subject
 import exam.projects.sosu_final.repositories.SubjectRepository
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
+import exam.projects.sosu_final.repositories.entities.GeneralInformation
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import retrofit2.Response
@@ -22,19 +23,26 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
     val addSubjectResponse: MutableLiveData<Response<SubjectDto>> = MutableLiveData()
 
     /* GENERAL INFORMATION */
+    val getAllGeneralInformationResponse: MutableLiveData<Response<List<GeneralInformation>>> = MutableLiveData()
+    val getOneGeneralInformationResponse: MutableLiveData<Response<GeneralInformation>> = MutableLiveData()
     val updateGeneralInformationResponse: MutableLiveData<Response<GeneralInformationDto>> = MutableLiveData()
 
     fun getOne(subjectId: String) {
         viewModelScope.launch {
-            try {
-                val response = subjectRepository.getOne(subjectId)
-                getOneSubjectResponse.value = response;
+            val response = try {
+                subjectRepository.getOne(subjectId)
             } catch (e: IOException) {
-                Log.e(TAG, "getAll: $IOException")
+                Log.e(TAG,"getOne: $IOException")
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG, "getAll: $HttpException")
+                Log.e(TAG, "getOne: $HttpException")
                 return@launch
+            }
+
+            if (response.isSuccessful) {
+                getOneSubjectResponse.value = response;
+            } else {
+                Log.e(TAG, "getOne: ${response.code()}")
             }
         }
     }
@@ -69,6 +77,36 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
         }
     }
 
+    fun getAllGeneralInformation(subjectId: String) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.getAllGeneralInformation(subjectId)
+                getAllGeneralInformationResponse.value = response;
+            } catch (e: IOException) {
+                Log.e(TAG, "updateGeneralInformation: $IOException", )
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "addSubject: $IOException")
+                return@launch
+            }
+        }
+    }
+
+    fun getOneGeneralInformation(subjectId: String, generalInformationId: String) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.getOneGeneralInformation(subjectId, generalInformationId)
+                getOneGeneralInformationResponse.value = response;
+            } catch (e: IOException) {
+                Log.e(TAG, "updateGeneralInformation: $IOException", )
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "addSubject: $IOException")
+                return@launch
+            }
+        }
+    }
+
     fun updateGeneralInformation(subjectId: String, generalInformationId: String, generalInformationDto: GeneralInformationDto) {
         viewModelScope.launch {
             try {
@@ -76,6 +114,9 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 updateGeneralInformationResponse.value = response;
             } catch (e: IOException) {
                 Log.e(TAG, "updateGeneralInformation: $IOException", )
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "addSubject: $IOException")
                 return@launch
             }
         }
