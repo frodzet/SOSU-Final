@@ -1,4 +1,4 @@
-package exam.projects.sosu_final.entities
+package exam.projects.sosu_final.repositories.entities
 
 import com.google.gson.annotations.SerializedName
 

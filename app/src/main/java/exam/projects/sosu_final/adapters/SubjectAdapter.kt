@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
-import exam.projects.sosu_final.entities.Subject
+import exam.projects.sosu_final.repositories.entities.Subject
 
 class SubjectAdapter(val listener: (Subject, Int) -> Unit):  RecyclerView.Adapter<SubjectAdapter.SubjectsViewHolder>(){
 
