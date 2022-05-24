@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import exam.projects.sosu_final.repositories.entities.Subject
 import exam.projects.sosu_final.repositories.SubjectRepository
+import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -15,9 +16,13 @@ const val TAG = "ViewModel"
 const val IOException = "Server not responding!"
 const val HttpException = "Bad request!"
 class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewModel() {
+    /* SUBJECT */
     val getOneSubjectResponse: MutableLiveData<Response<Subject>> = MutableLiveData()
     val getAllSubjectsResponse: MutableLiveData<Response<List<Subject>>> = MutableLiveData()
     val addSubjectResponse: MutableLiveData<Response<SubjectDto>> = MutableLiveData()
+
+    /* GENERAL INFORMATION */
+    val updateGeneralInformationResponse: MutableLiveData<Response<GeneralInformationDto>> = MutableLiveData()
 
     fun getOne(subjectId: String) {
         viewModelScope.launch {
@@ -59,6 +64,18 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 return@launch
             } catch (e: HttpException) {
                 Log.e(TAG, "addSubject: $IOException")
+                return@launch
+            }
+        }
+    }
+
+    fun updateGeneralInformation(subjectId: String, generalInformationId: String, generalInformationDto: GeneralInformationDto) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.updateGeneralInformation(subjectId, generalInformationId, generalInformationDto)
+                updateGeneralInformationResponse.value = response;
+            } catch (e: IOException) {
+                Log.e(TAG, "updateGeneralInformation: $IOException", )
                 return@launch
             }
         }

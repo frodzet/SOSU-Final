@@ -1,6 +1,7 @@
 package exam.projects.sosu_final.repositories
 
 import exam.projects.sosu_final.api.RetrofitInstance
+import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
 import exam.projects.sosu_final.repositories.entities.Subject
 import retrofit2.Response
@@ -16,5 +17,9 @@ class SubjectRepository {
 
     suspend fun addSubject(subjectDto: SubjectDto): Response<SubjectDto> {
         return RetrofitInstance.subjectApi.addSubject(subjectDto);
+    }
+
+    suspend fun updateGeneralInformation(subjectId: String, generalInformationId: String, generalInformationDto: GeneralInformationDto): Response<GeneralInformationDto> {
+        return RetrofitInstance.subjectApi.updateGeneralInformation(subjectId, generalInformationId, generalInformationDto);
     }
 }
