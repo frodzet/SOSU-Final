@@ -17,6 +17,9 @@ interface SubjectApi {
     @POST("subjects")
     suspend fun addSubject(@Body subjectDto: SubjectDto): Response<SubjectDto>
 
+    @DELETE("subjects/{subjectId}")
+    suspend fun deleteSubject(@Path("subjectId") subjectId: String): Response<Subject>
+
     @GET("subjects/{subjectId}/general-information")
     suspend fun getAllGeneralInformation(@Path("subjectId") subjectId: String): Response<List<GeneralInformation>>
 

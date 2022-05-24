@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SOSU-Final</string>
-    <string name="phone">Telefon</string>
+    <string name="phone">Telefonnummer</string>
     <string name="email">Email</string>
     <string name="name">Navn</string>
     <string name="address">Addresse</string>
@@ -10,4 +10,10 @@
     <string name="title">Titel</string>
     <string name="hint_comment">Kommentar</string>
     <string name="save">Gem</string>
+    <string name="delete">Slet</string>
+    <string name="first_name">Fornavn</string>
+    <string name="last_name">Efternavn</string>
+    <string name="city">By</string>
+    <string name="street">Gade</string>
+    <string name="post_code">Postnummer</string>
 </resources>

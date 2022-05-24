@@ -1,14 +1,16 @@
 package exam.projects.sosu_final.adapters
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import exam.projects.sosu_final.activities.DashboardActivity
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.entities.Subject
 
-class SubjectAdapter(val listener: (Subject, Int) -> Unit):  RecyclerView.Adapter<SubjectAdapter.SubjectsViewHolder>(){
+class SubjectAdapter(val context: DashboardActivity, val listener: (Subject, Int) -> Unit):  RecyclerView.Adapter<SubjectAdapter.SubjectsViewHolder>(){
 
     inner class SubjectsViewHolder(val binding: SubjectAboutItemBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -60,9 +62,5 @@ class SubjectAdapter(val listener: (Subject, Int) -> Unit):  RecyclerView.Adapte
             differ.submitList(value)
         }
 
-    fun updateList(searchedSubjects: List<Subject>) {
-        allSubjects = searchedSubjects
-        notifyDataSetChanged()
-    }
 
 }

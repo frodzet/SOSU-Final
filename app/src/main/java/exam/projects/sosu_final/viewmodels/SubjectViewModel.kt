@@ -77,6 +77,21 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
         }
     }
 
+    fun deleteSubject(subjectId: String) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.deleteSubject(subjectId)
+                getOneSubjectResponse.value = response
+            } catch (e: IOException) {
+                Log.e(TAG, "addSubject: $IOException")
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "addSubject: $IOException")
+                return@launch
+            }
+        }
+    }
+
     fun getAllGeneralInformation(subjectId: String) {
         viewModelScope.launch {
             try {

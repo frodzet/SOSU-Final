@@ -32,6 +32,8 @@ class GeneralInformationAdapter(val listener: (GeneralInformation) -> Unit): Rec
                 if(editTextComment.visibility == View.GONE) {
                     editTextComment.visibility = View.VISIBLE
                     buttonSave.visibility = View.VISIBLE
+                    if(generalInformation.comment == null)
+                        generalInformation.comment = ""
                     if(!editTextComment.text.toString().contains(generalInformation.comment)) {
                         editTextComment.text.append(generalInformation.comment)
                     }

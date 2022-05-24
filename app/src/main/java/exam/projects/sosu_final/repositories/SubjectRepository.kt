@@ -20,6 +20,10 @@ class SubjectRepository {
         return RetrofitInstance.subjectApi.addSubject(subjectDto);
     }
 
+    suspend fun deleteSubject(subjectId: String): Response<Subject> {
+        return RetrofitInstance.subjectApi.deleteSubject(subjectId)
+    }
+
     suspend fun getAllGeneralInformation(subjectId: String): Response<List<GeneralInformation>> {
         return RetrofitInstance.subjectApi.getAllGeneralInformation(subjectId)
     }
