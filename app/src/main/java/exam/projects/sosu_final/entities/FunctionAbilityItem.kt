@@ -1,13 +1,15 @@
 package exam.projects.sosu_final.entities
 
+import com.google.gson.annotations.SerializedName
+
 data class FunctionAbilityItem(
-    val __v: Int,
-    val _id: String,
-    val currentLevel: Any,
-    val execution: Any,
-    val expectedLevel: Any,
-    val meaningOfExecution: Any,
-    val note: Any,
+    @SerializedName("_id")
+    val id: String,
+    val currentLevel: String,
+    val execution: String,
+    val expectedLevel: String,
+    val meaningOfExecution: String,
+    val note: String,
     val subTitle: String,
-    val subjectWish: Any
+    val subjectWish: String,
 )

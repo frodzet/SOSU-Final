@@ -1,9 +1,11 @@
 package exam.projects.sosu_final.entities
 
+import com.google.gson.annotations.SerializedName
+
 data class GeneralInformation(
-    val __v: Int,
-    val _id: String,
-    val comment: Any,
+    @SerializedName("_id")
+    val id: String,
+    val comment: String,
     val description: String,
     val title: String
 )

@@ -1,7 +1,10 @@
 package exam.projects.sosu_final.entities
 
+import com.google.gson.annotations.SerializedName
+
 data class Address(
-    val _id: String,
+    @SerializedName("_id")
+    val id: String,
     val city: String,
     val postCode: Int,
     val street: String

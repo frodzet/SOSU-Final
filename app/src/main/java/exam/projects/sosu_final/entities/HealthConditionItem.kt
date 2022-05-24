@@ -1,10 +1,12 @@
 package exam.projects.sosu_final.entities
 
+import com.google.gson.annotations.SerializedName
+
 data class HealthConditionItem(
-    val __v: Int,
-    val _id: String,
-    val comment: Any,
-    val reason: Any,
-    val relevant: Any,
+    @SerializedName("_id")
+    val id: String,
+    val comment: String,
+    val reason: String,
+    val relevant: String,
     val subTitle: String
 )
