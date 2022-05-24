@@ -60,4 +60,9 @@ class SubjectAdapter(val listener: (Subject, Int) -> Unit):  RecyclerView.Adapte
             differ.submitList(value)
         }
 
+    fun updateList(searchedSubjects: List<Subject>) {
+        allSubjects = searchedSubjects
+        notifyDataSetChanged()
+    }
+
 }

@@ -45,10 +45,12 @@ class DashboardActivity : AppCompatActivity() {
         subjectViewModel = ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
 
         getAllSubjects()
+
     }
 
     private fun setupRecyclerView() {
         this.activityBinding.apply {
+
             recyclerViewSubjects.adapter = subjectsAdapter
             recyclerViewSubjects.layoutManager = LinearLayoutManager(this@DashboardActivity)
         }
