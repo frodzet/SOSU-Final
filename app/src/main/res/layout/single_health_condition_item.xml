@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextComment" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/radioGroupHealthCondition"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -100,6 +100,6 @@
         android:text="@string/save"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupHealthCondition" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".activities.healthcondition.SingleHealthConditionActivity">
 
-    <TextView
-        android:id="@+id/textViewHealthConditionTitle"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:text="@string/title"
+    <LinearLayout
+        android:id="@+id/linearLayoutSingleSubject"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/constraint_layout_single_item_height"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,10 +19,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSingleHealthCondition"
-        android:layout_width="409dp"
-        android:layout_height="710dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutSingleSubject" />
 </androidx.constraintlayout.widget.ConstraintLayout>

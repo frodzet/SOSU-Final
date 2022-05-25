@@ -91,10 +91,10 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 val response = subjectRepository.deleteSubject(subjectId)
                 getOneSubjectResponse.value = response
             } catch (e: IOException) {
-                Log.e(TAG, "addSubject: $IOException")
+                Log.e(TAG, "deleteSubject: $IOException")
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG, "addSubject: $IOException")
+                Log.e(TAG, "deleteSubject: $IOException")
                 return@launch
             }
         }
@@ -106,10 +106,10 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 val response = subjectRepository.getAllGeneralInformation(subjectId)
                 getAllGeneralInformationResponse.value = response;
             } catch (e: IOException) {
-                Log.e(TAG, "updateGeneralInformation: $IOException", )
+                Log.e(TAG, "getAllGeneralInformation: $IOException", )
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG, "addSubject: $IOException")
+                Log.e(TAG, "getAllGeneralInformation: $IOException")
                 return@launch
             }
         }
@@ -121,10 +121,10 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 val response = subjectRepository.getOneGeneralInformation(subjectId, generalInformationId)
                 getOneGeneralInformationResponse.value = response;
             } catch (e: IOException) {
-                Log.e(TAG, "updateGeneralInformation: $IOException", )
+                Log.e(TAG, "getOneGeneralInformation: $IOException", )
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG, "addSubject: $IOException")
+                Log.e(TAG, "getOneGeneralInformation: $IOException")
                 return@launch
             }
         }
@@ -139,7 +139,7 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 Log.e(TAG, "updateGeneralInformation: $IOException", )
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG, "addSubject: $IOException")
+                Log.e(TAG, "updateGeneralInformation: $IOException")
                 return@launch
             }
         }
@@ -151,25 +151,25 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 val response = subjectRepository.getAllHealthConditions(subjectId)
                 getAllHealthConditionsResponse.value = response
             } catch (e: IOException) {
-                Log.e(TAG, "updateGeneralInformation: $IOException", )
+                Log.e(TAG, "getAllHealthConditions: $IOException", )
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG, "addSubject: $IOException")
+                Log.e(TAG, "getAllHealthConditions: $IOException")
                 return@launch
             }
         }
     }
 
-    fun getOneHealthCondition(subjectId: String, healthConditionId: String) {
+    fun getAllHealthConditionItems(subjectId: String, healthConditionId: String) {
         viewModelScope.launch {
             try {
                 val response = subjectRepository.getOneHealthCondition(subjectId, healthConditionId)
                 getOneHealthConditionResponse.value = response!!
             } catch (e: IOException) {
-                Log.e(TAG, "updateGeneralInformation: $IOException", )
+                Log.e(TAG, "getAllHealthConditionItems: $IOException", )
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG, "updateGeneralInformation: $IOException")
+                Log.e(TAG, "getAllHealthConditionItems: $IOException")
                 return@launch
             }
         }

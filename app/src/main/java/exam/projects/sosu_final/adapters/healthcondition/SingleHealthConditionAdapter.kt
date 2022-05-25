@@ -29,28 +29,28 @@ class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit):
         val healthConditionItem = healthConditionItems[position]
 
         holder.binding.apply {
+            if(!editTextComment.text.toString().contains(healthConditionItem.comment))
+                editTextComment.text.append(healthConditionItem.comment)
+            if(!editTextReason.text.toString().contains(healthConditionItem.reason))
+                editTextReason.text.append(healthConditionItem.reason)
+            if(healthConditionItem.relevant == 0)
+                radioButtonNotRelevant.isChecked = true
+            if(healthConditionItem.relevant == 1)
+                radioButtonPotential.isChecked = true
+            if(healthConditionItem.relevant == 2)
+                radioButtonRelevant.isChecked = true
+
             buttonHealthConditionItem.text = healthConditionItem.subTitle
             buttonHealthConditionItem.setOnClickListener {
                 if(editTextComment.visibility == View.GONE) {
                     editTextComment.visibility = View.VISIBLE
                     editTextReason.visibility = View.VISIBLE
-                    radioGroup.visibility = View.VISIBLE
+                    radioGroupHealthCondition.visibility = View.VISIBLE
                     buttonSave.visibility = View.VISIBLE
-
-                    if(!editTextComment.text.toString().contains(healthConditionItem.comment))
-                        editTextComment.text.append(healthConditionItem.comment)
-                    if(!editTextReason.text.toString().contains(healthConditionItem.reason))
-                        editTextReason.text.append(healthConditionItem.reason)
-                    if(healthConditionItem.relevant == 0)
-                        radioButtonNotRelevant.isChecked = true
-                    if(healthConditionItem.relevant == 1)
-                        radioButtonPotential.isChecked = true
-                    if(healthConditionItem.relevant == 2)
-                        radioButtonRelevant.isChecked = true
                 } else {
                     editTextComment.visibility = View.GONE
                     editTextReason.visibility = View.GONE
-                    radioGroup.visibility = View.GONE
+                    radioGroupHealthCondition.visibility = View.GONE
                     buttonSave.visibility = View.GONE
                 }
             }
@@ -66,7 +66,7 @@ class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit):
                 }
                 editTextComment.visibility = View.GONE
                 editTextReason.visibility = View.GONE
-                radioGroup.visibility = View.GONE
+                radioGroupHealthCondition.visibility = View.GONE
                 buttonSave.visibility = View.GONE
                 listener(healthConditionItem)
             }
