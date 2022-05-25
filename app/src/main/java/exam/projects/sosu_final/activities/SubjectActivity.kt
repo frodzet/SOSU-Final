@@ -9,14 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import exam.projects.sosu_final.R
+import exam.projects.sosu_final.activities.generalinformation.GeneralInformationActivity
+import exam.projects.sosu_final.activities.healthcondition.HealthConditionActivity
 import exam.projects.sosu_final.databinding.ActivitySubjectBinding
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
-import exam.projects.sosu_final.repositories.dtos.SubjectDto
-import exam.projects.sosu_final.repositories.entities.Subject
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
-import retrofit2.Response
 
 class SubjectActivity : AppCompatActivity() {
     private lateinit var activityBinding: ActivitySubjectBinding
@@ -58,6 +57,14 @@ class SubjectActivity : AppCompatActivity() {
 
         this.activityBinding.buttonGeneralInformation.setOnClickListener {
             val intent: Intent = Intent(this@SubjectActivity, GeneralInformationActivity::class.java)
+
+            intent.putExtra("subjectId", subjectId)
+
+            startActivity(intent)
+        }
+
+        this.activityBinding.buttonHealthCondition.setOnClickListener {
+            val intent: Intent = Intent(this@SubjectActivity, HealthConditionActivity::class.java)
 
             intent.putExtra("subjectId", subjectId)
 

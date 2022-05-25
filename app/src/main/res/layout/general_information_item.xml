@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/buttonTitle"
-        android:layout_width="928dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/holo_orange_dark"
         android:text="@string/title"

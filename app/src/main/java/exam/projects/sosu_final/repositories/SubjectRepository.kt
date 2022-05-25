@@ -4,6 +4,8 @@ import exam.projects.sosu_final.api.RetrofitInstance
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
 import exam.projects.sosu_final.repositories.entities.GeneralInformation
+import exam.projects.sosu_final.repositories.entities.HealthCondition
+import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 import exam.projects.sosu_final.repositories.entities.Subject
 import retrofit2.Response
 
@@ -34,5 +36,13 @@ class SubjectRepository {
 
     suspend fun updateGeneralInformation(subjectId: String, generalInformationId: String, generalInformationDto: GeneralInformationDto): Response<GeneralInformationDto> {
         return RetrofitInstance.subjectApi.updateGeneralInformation(subjectId, generalInformationId, generalInformationDto);
+    }
+
+    suspend fun getAllHealthConditions(subjectId: String): Response<List<HealthCondition>> {
+        return RetrofitInstance.subjectApi.getAllHealthCondition(subjectId)
+    }
+
+    suspend fun getOneHealthCondition(subjectId: String, healthConditionId: String): Response<HealthCondition>? {
+        return RetrofitInstance.subjectApi.getOneHealthCondition(subjectId, healthConditionId);
     }
 }

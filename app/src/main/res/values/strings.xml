@@ -17,4 +17,9 @@
     <string name="street">Gade</string>
     <string name="post_code">Postnummer</string>
     <string name="refresh">Opdater Listen</string>
+    <string name="sub_title">SubTitle</string>
+    <string name="reason">Årsag</string>
+    <string name="not_relevant">Ikke relevant</string>
+    <string name="potentially_relevant">Potentielt Relevant</string>
+    <string name="relevant">Relevant</string>
 </resources>

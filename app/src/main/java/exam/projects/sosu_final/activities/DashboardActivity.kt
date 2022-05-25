@@ -118,7 +118,7 @@ class DashboardActivity : AppCompatActivity() {
         val phone = data.getStringExtra("phone")!!
         val city = data.getStringExtra("city")!!
         val street = data.getStringExtra("street")!!
-        val postCode = data.getIntExtra("postCode", 0)!!
+        val postCode = data.getIntExtra("postCode", 0)
 
         val subjectDto = SubjectDto(
             firstName,

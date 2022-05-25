@@ -1,4 +1,4 @@
-package exam.projects.sosu_final.activities
+package exam.projects.sosu_final.activities.generalinformation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,11 +15,8 @@ import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.entities.GeneralInformation
-import exam.projects.sosu_final.repositories.entities.Subject
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
-import retrofit2.Response
-import java.io.IOException
 
 class GeneralInformationActivity : AppCompatActivity() {
     private lateinit var subjectViewModel: SubjectViewModel

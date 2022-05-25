@@ -4,12 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_add_subject.xml" value="0.176" />
+        <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_all_health_conditions.xml" value="0.11302083333333333" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_dashboard.xml" value="0.11302083333333333" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_general_information.xml" value="0.264" />
+        <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_health_condition.xml" value="0.11302083333333333" />
+        <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_single_health_condition.xml" value="0.14719202898550723" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_subject.xml" value="0.1" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/general_information_item.xml" value="0.264" />
+        <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/health_condition_item.xml" value="0.2" />
+        <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/health_condition_item_item.xml" value="0.2" />
+        <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/single_health_condition_item.xml" value="0.2" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/subject_about_item.xml" value="0.264" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/siffe/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/expandable_list_content.xml" value="0.2" />
       </map>
     </option>
   </component>

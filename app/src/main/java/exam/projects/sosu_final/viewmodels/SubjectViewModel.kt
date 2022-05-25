@@ -9,6 +9,8 @@ import exam.projects.sosu_final.repositories.SubjectRepository
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
 import exam.projects.sosu_final.repositories.entities.GeneralInformation
+import exam.projects.sosu_final.repositories.entities.HealthCondition
+import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import retrofit2.Response
@@ -26,6 +28,10 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
     val getAllGeneralInformationResponse: MutableLiveData<Response<List<GeneralInformation>>> = MutableLiveData()
     val getOneGeneralInformationResponse: MutableLiveData<Response<GeneralInformation>> = MutableLiveData()
     val updateGeneralInformationResponse: MutableLiveData<Response<GeneralInformationDto>> = MutableLiveData()
+
+    /* HEALTH CONDITIONS */
+    val getAllHealthConditionsResponse: MutableLiveData<Response<List<HealthCondition>>> = MutableLiveData()
+    val getOneHealthConditionResponse: MutableLiveData<Response<HealthCondition>> = MutableLiveData()
 
     fun getOne(subjectId: String) {
         viewModelScope.launch {
@@ -126,7 +132,37 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
         viewModelScope.launch {
             try {
                 val response = subjectRepository.updateGeneralInformation(subjectId, generalInformationId, generalInformationDto)
-                updateGeneralInformationResponse.value = response;
+                updateGeneralInformationResponse.value = response
+            } catch (e: IOException) {
+                Log.e(TAG, "updateGeneralInformation: $IOException", )
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "addSubject: $IOException")
+                return@launch
+            }
+        }
+    }
+
+    fun getAllHealthConditions(subjectId: String) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.getAllHealthConditions(subjectId)
+                getAllHealthConditionsResponse.value = response
+            } catch (e: IOException) {
+                Log.e(TAG, "updateGeneralInformation: $IOException", )
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "addSubject: $IOException")
+                return@launch
+            }
+        }
+    }
+
+    fun getOneHealthCondition(subjectId: String, healthConditionId: String) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.getOneHealthCondition(subjectId, healthConditionId)
+                getOneHealthConditionResponse.value = response
             } catch (e: IOException) {
                 Log.e(TAG, "updateGeneralInformation: $IOException", )
                 return@launch
