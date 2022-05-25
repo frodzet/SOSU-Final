@@ -12,6 +12,7 @@ import exam.projects.sosu_final.databinding.ActivityHealthConditionBinding
 import exam.projects.sosu_final.databinding.ActivitySingleHealthConditionBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
 import exam.projects.sosu_final.repositories.entities.HealthCondition
+import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
 
@@ -21,9 +22,13 @@ class SingleHealthConditionActivity : AppCompatActivity() {
     private lateinit var subjectId: String
     private lateinit var healthConditionId: String
     private lateinit var healthConditionTitle: String
+    private lateinit var lastClickedHealthConditionItem: HealthConditionItem
 
     private val singleHealthConditionAdapter by lazy {
-        SingleHealthConditionAdapter()
+        SingleHealthConditionAdapter(listener = {
+            lastClickedHealthConditionItem = it
+            Toast.makeText(this@SingleHealthConditionActivity, lastClickedHealthConditionItem.id, Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

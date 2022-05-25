@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import exam.projects.sosu_final.databinding.SingleHealthConditionItemBinding
+import exam.projects.sosu_final.repositories.entities.GeneralInformation
+import exam.projects.sosu_final.repositories.entities.HealthCondition
 import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 
-class SingleHealthConditionAdapter: RecyclerView.Adapter<SingleHealthConditionAdapter.SingleHealthConditionViewHolder>() {
+class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit): RecyclerView.Adapter<SingleHealthConditionAdapter.SingleHealthConditionViewHolder>() {
     inner class SingleHealthConditionViewHolder(val binding: SingleHealthConditionItemBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
@@ -27,19 +29,40 @@ class SingleHealthConditionAdapter: RecyclerView.Adapter<SingleHealthConditionAd
         val healthConditionItem = healthConditionItems[position]
 
         holder.binding.apply {
-            buttonHealthConditionItemSubTitle.text = healthConditionItem.subTitle
-            buttonHealthConditionItemSubTitle.setOnClickListener {
+            buttonHealthConditionItem.text = healthConditionItem.subTitle
+            buttonHealthConditionItem.setOnClickListener {
                 if(editTextComment.visibility == View.GONE) {
                     editTextComment.visibility = View.VISIBLE
                     editTextReason.visibility = View.VISIBLE
                     radioGroup.visibility = View.VISIBLE
                     buttonSave.visibility = View.VISIBLE
+
+                    if(!editTextComment.text.toString().contains(healthConditionItem.comment))
+                        editTextComment.text.append(healthConditionItem.comment)
+                    if(!editTextReason.text.toString().contains(healthConditionItem.reason))
+                        editTextReason.text.append(healthConditionItem.reason)
                 } else {
                     editTextComment.visibility = View.GONE
                     editTextReason.visibility = View.GONE
                     radioGroup.visibility = View.GONE
                     buttonSave.visibility = View.GONE
                 }
+            }
+            buttonSave.setOnClickListener {
+                healthConditionItem.comment = editTextComment.text.toString()
+                healthConditionItem.reason = editTextReason.text.toString()
+                if(radioButtonNotRelevant.isChecked) {
+                    healthConditionItem.relevant = 0
+                } else if (radioButtonPotential.isChecked) {
+                    healthConditionItem.relevant = 1
+                } else if (radioButtonRelevant.isChecked) {
+                    healthConditionItem.relevant = 2
+                }
+                editTextComment.visibility = View.GONE
+                editTextReason.visibility = View.GONE
+                radioGroup.visibility = View.GONE
+                buttonSave.visibility = View.GONE
+                listener(healthConditionItem)
             }
         }
     }

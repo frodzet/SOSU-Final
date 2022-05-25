@@ -73,17 +73,6 @@ class GeneralInformationActivity : AppCompatActivity() {
                 Toast.makeText(this, "Subject not found!", Toast.LENGTH_LONG).show()
             }
         })
-
-//        activityBinding.apply {
-//            subjectViewModel.getOne(subjectId)
-//            subjectViewModel.getOneSubjectResponse.observe(this@GeneralInformationActivity, Observer { response ->
-//                if(response.isSuccessful) {
-//                    textViewName.text = "${response.body()!!.firstName} ${response.body()!!.lastName}"
-//                } else {
-//                    textViewName.text = response.code().toString()
-//                }
-//            })
-//        }
     }
 
     private fun setupRecyclerView() {
