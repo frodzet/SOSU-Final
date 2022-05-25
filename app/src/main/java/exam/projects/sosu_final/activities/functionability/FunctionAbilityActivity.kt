@@ -1,41 +1,48 @@
-package exam.projects.sosu_final.activities
+package exam.projects.sosu_final.activities.functionability
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import exam.projects.sosu_final.R
-import exam.projects.sosu_final.activities.functionability.FunctionAbilityActivity
-import exam.projects.sosu_final.activities.generalinformation.GeneralInformationActivity
-import exam.projects.sosu_final.activities.healthcondition.HealthConditionActivity
-import exam.projects.sosu_final.databinding.ActivitySubjectBinding
+import exam.projects.sosu_final.adapters.functionability.FunctionAbilityAdapter
+import exam.projects.sosu_final.databinding.ActivityFunctionAbilityBinding
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
+import exam.projects.sosu_final.repositories.entities.FunctionAbility
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
 
-class SubjectActivity : AppCompatActivity() {
-    private lateinit var activityBinding: ActivitySubjectBinding
-    private lateinit var subjectAboutItemBinding: SubjectAboutItemBinding
+class FunctionAbilityActivity : AppCompatActivity() {
     private lateinit var subjectViewModel: SubjectViewModel
+    private lateinit var activityBinding: ActivityFunctionAbilityBinding
+    private lateinit var subjectAboutItemBinding: SubjectAboutItemBinding
     private lateinit var subjectId: String
+
+    private val functionAbilityAdapter by lazy {
+        FunctionAbilityAdapter(listener = {
+//            lastClickedHealthCondition = it
+            startActivtySingleHealthCondition(it)
+        })
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityBinding = ActivitySubjectBinding.inflate(layoutInflater)
+        activityBinding = ActivityFunctionAbilityBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
         subjectId = intent.getStringExtra("subjectId")!!
 
+        setupRecyclerView()
         createNavigationBar()
 
         val subjectRepository = SubjectRepository()
         val viewModelFactory = SubjectViewModelFactory(subjectRepository)
-        subjectViewModel =
-            ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
+        subjectViewModel = ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
 
         val subjectAboutView: View = layoutInflater.inflate(R.layout.subject_about_item, null)
         activityBinding.linearLayoutSingleSubject.addView(subjectAboutView)
@@ -56,28 +63,20 @@ class SubjectActivity : AppCompatActivity() {
             }
         })
 
-        this.activityBinding.buttonGeneralInformation.setOnClickListener {
-            val intent: Intent = Intent(this@SubjectActivity, GeneralInformationActivity::class.java)
+        subjectViewModel.getAllFunctionAbilities(subjectId)
+        subjectViewModel.getAllFunctionAbilitiesResponse.observe(this, Observer { response ->
+            if (response.isSuccessful) {
+                functionAbilityAdapter.functionAbilities = response.body()!!
+            } else {
+                Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
 
-            intent.putExtra("subjectId", subjectId)
-
-            startActivity(intent)
-        }
-
-        this.activityBinding.buttonHealthCondition.setOnClickListener {
-            val intent: Intent = Intent(this@SubjectActivity, HealthConditionActivity::class.java)
-
-            intent.putExtra("subjectId", subjectId)
-
-            startActivity(intent)
-        }
-
-        this.activityBinding.buttonFunctionAbility.setOnClickListener {
-            val intent: Intent = Intent(this@SubjectActivity, FunctionAbilityActivity::class.java)
-
-            intent.putExtra("subjectId", subjectId)
-
-            startActivity(intent)
+    private fun setupRecyclerView() {
+        this.activityBinding.apply {
+            recyclerViewFunctionAbility.adapter = functionAbilityAdapter
+            recyclerViewFunctionAbility.layoutManager = LinearLayoutManager(this@FunctionAbilityActivity)
         }
     }
 
@@ -88,6 +87,17 @@ class SubjectActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+        finish()
         return super.onSupportNavigateUp()
+    }
+
+    private fun startActivtySingleHealthCondition(functionAbility: FunctionAbility) {
+//        val intent: Intent = Intent(this@FunctionAbilityActivity, SingleHealthConditionActivity::class.java)
+//
+//        intent.putExtra("subjectId", subjectId)
+//        intent.putExtra("healthConditionId", healthCondition.id)
+//        intent.putExtra("healthConditionTitle", healthCondition.title)
+//
+//        startActivity(intent)
     }
 }

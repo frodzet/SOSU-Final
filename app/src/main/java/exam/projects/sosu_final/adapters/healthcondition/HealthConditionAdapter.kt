@@ -34,7 +34,6 @@ class HealthConditionAdapter(val listener: (HealthCondition) -> Unit): RecyclerV
         holder.binding.apply {
             buttonTitle.text = healthCondition.title
             buttonTitle.setOnClickListener {
-                Toast.makeText(holder.binding.root.context, "${healthCondition.id}", Toast.LENGTH_SHORT).show()
                 listener(healthCondition)
             }
         }

@@ -10,13 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import exam.projects.sosu_final.R
-import exam.projects.sosu_final.adapters.GeneralInformationAdapter
 import exam.projects.sosu_final.adapters.healthcondition.HealthConditionAdapter
-import exam.projects.sosu_final.databinding.ActivityGeneralInformationBinding
 import exam.projects.sosu_final.databinding.ActivityHealthConditionBinding
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
-import exam.projects.sosu_final.repositories.entities.GeneralInformation
 import exam.projects.sosu_final.repositories.entities.HealthCondition
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory

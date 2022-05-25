@@ -1,4 +1,4 @@
-package exam.projects.sosu_final.adapters
+package exam.projects.sosu_final.adapters.generalinformation
 
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +15,14 @@ class GeneralInformationAdapter(val listener: (GeneralInformation) -> Unit): Rec
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): GeneralInformationAdapter.GeneralInformationViewHolder {
+    ): GeneralInformationViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = GeneralInformationItemBinding.inflate(layoutInflater, parent, false)
 
         return GeneralInformationViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: GeneralInformationAdapter.GeneralInformationViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GeneralInformationViewHolder, position: Int) {
         val generalInformation = allGeneralInformation[position]
 
         holder.binding.apply {

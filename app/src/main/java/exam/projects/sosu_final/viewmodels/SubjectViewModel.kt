@@ -4,14 +4,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import exam.projects.sosu_final.repositories.entities.Subject
 import exam.projects.sosu_final.repositories.SubjectRepository
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
-import exam.projects.sosu_final.repositories.entities.GeneralInformation
-import exam.projects.sosu_final.repositories.entities.HealthCondition
-import exam.projects.sosu_final.repositories.entities.HealthConditionItem
+import exam.projects.sosu_final.repositories.entities.*
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import retrofit2.Response
@@ -34,6 +31,9 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
     val getAllHealthConditionsResponse: MutableLiveData<Response<List<HealthCondition>>> = MutableLiveData()
     val getOneHealthConditionResponse: MutableLiveData<Response<HealthCondition>> = MutableLiveData()
     val updateHealthConditionResponse: MutableLiveData<Response<HealthConditionItemDto>> = MutableLiveData()
+
+    /* FUNCTION ABILITIES */
+    val getAllFunctionAbilitiesResponse: MutableLiveData<Response<List<FunctionAbility>>> = MutableLiveData()
 
     fun getOne(subjectId: String) {
         viewModelScope.launch {
@@ -185,6 +185,21 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 return@launch
             } catch (e: HttpException) {
                 Log.e(TAG, "updateHealthConditionItem: $IOException")
+                return@launch
+            }
+        }
+    }
+
+    fun getAllFunctionAbilities(subjectId: String) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.getAllFunctionAbilities(subjectId)
+                getAllFunctionAbilitiesResponse.value = response
+            } catch (e: IOException) {
+                Log.e(TAG, "getAllFunctionAbilities: $IOException", )
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "getAllFunctionAbilities: $IOException")
                 return@launch
             }
         }

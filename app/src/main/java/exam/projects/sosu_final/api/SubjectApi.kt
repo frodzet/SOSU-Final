@@ -3,10 +3,7 @@ package exam.projects.sosu_final.api
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
-import exam.projects.sosu_final.repositories.entities.GeneralInformation
-import exam.projects.sosu_final.repositories.entities.HealthCondition
-import exam.projects.sosu_final.repositories.entities.HealthConditionItem
-import exam.projects.sosu_final.repositories.entities.Subject
+import exam.projects.sosu_final.repositories.entities.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -40,4 +37,7 @@ interface SubjectApi {
 
     @PATCH("subjects/{subjectId}/health-conditions/{healthConditionId}/{healthConditionItemId}")
     suspend fun updateHealthConditionItem(@Path("subjectId") subjectId: String, @Path("healthConditionId") healthConditionId: String, @Path("healthConditionItemId") healthConditionItemId: String, @Body healthConditionItemDto: HealthConditionItemDto): Response<HealthConditionItemDto>
+
+    @GET("subjects/{subjectId}/function-abilities")
+    suspend fun getAllFunctionAbilities(@Path("subjectId") subjectId: String): Response<List<FunctionAbility>>
 }
