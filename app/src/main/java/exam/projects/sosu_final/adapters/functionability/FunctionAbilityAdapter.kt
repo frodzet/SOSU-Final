@@ -30,6 +30,9 @@ class FunctionAbilityAdapter(val listener: (FunctionAbility) -> Unit): RecyclerV
 
         holder.binding.apply {
             this.buttonTitle.text = functionAbility.title
+            buttonTitle.setOnClickListener {
+                listener(functionAbility)
+            }
         }
     }
 

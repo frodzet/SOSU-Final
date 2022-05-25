@@ -1,41 +1,47 @@
 package exam.projects.sosu_final.activities.functionability
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import exam.projects.sosu_final.R
-import exam.projects.sosu_final.adapters.functionability.FunctionAbilityAdapter
-import exam.projects.sosu_final.databinding.ActivityFunctionAbilityBinding
+import exam.projects.sosu_final.adapters.functionability.SingleFunctionAbilityAdapter
+import exam.projects.sosu_final.adapters.healthcondition.SingleHealthConditionAdapter
+import exam.projects.sosu_final.databinding.ActivitySingleFunctionAbilityBinding
+import exam.projects.sosu_final.databinding.ActivitySingleHealthConditionBinding
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
-import exam.projects.sosu_final.repositories.entities.FunctionAbility
+import exam.projects.sosu_final.repositories.entities.FunctionAbilityItem
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
 
-class FunctionAbilityActivity : AppCompatActivity() {
+class SingleFunctionAbilityActivity : AppCompatActivity() {
     private lateinit var subjectViewModel: SubjectViewModel
-    private lateinit var activityBinding: ActivityFunctionAbilityBinding
+    private lateinit var activityBinding: ActivitySingleFunctionAbilityBinding
     private lateinit var subjectAboutItemBinding: SubjectAboutItemBinding
     private lateinit var subjectId: String
+    private lateinit var functionAbilityId: String
+    private lateinit var functionAbilityTitle: String
+    private lateinit var lastClickedFunctionAbility: FunctionAbilityItem
 
-    private val functionAbilityAdapter by lazy {
-        FunctionAbilityAdapter(listener = {
-//            lastClickedHealthCondition = it
-            startActivitySingleAbility(it)
+    private val singleFunctionAbilityAdapter by lazy {
+        SingleFunctionAbilityAdapter(listener = {
+            lastClickedFunctionAbility = it
+//            healthConditionItem(lastClickedHealthConditionItem)
         })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityBinding = ActivityFunctionAbilityBinding.inflate(layoutInflater)
+        activityBinding = ActivitySingleFunctionAbilityBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
         subjectId = intent.getStringExtra("subjectId")!!
+        functionAbilityId = intent.getStringExtra("functionAbilityId")!!
+        functionAbilityTitle = intent.getStringExtra("functionAbilityTitle")!!
 
         setupRecyclerView()
         createNavigationBar()
@@ -63,31 +69,25 @@ class FunctionAbilityActivity : AppCompatActivity() {
             }
         })
 
-        subjectViewModel.getAllFunctionAbilities(subjectId)
-        subjectViewModel.getAllFunctionAbilitiesResponse.observe(this, Observer { response ->
+        subjectViewModel.getAllFunctionAbilityItems(subjectId, functionAbilityId)
+        subjectViewModel.getOneFunctionAbilityResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-                functionAbilityAdapter.functionAbilities = response.body()!!
+                singleFunctionAbilityAdapter.functionAbilityItems = response.body()!!.functionAbilityItems
             } else {
                 Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
             }
         })
+
+        activityBinding.apply {
+
+        }
     }
 
     private fun setupRecyclerView() {
         this.activityBinding.apply {
-            recyclerViewFunctionAbility.adapter = functionAbilityAdapter
-            recyclerViewFunctionAbility.layoutManager = LinearLayoutManager(this@FunctionAbilityActivity)
+            recyclerViewNewTest.adapter = singleFunctionAbilityAdapter
+            recyclerViewNewTest.layoutManager = LinearLayoutManager(this@SingleFunctionAbilityActivity)
         }
-    }
-
-    private fun startActivitySingleAbility(functionAbility: FunctionAbility) {
-        val intent: Intent = Intent(this@FunctionAbilityActivity, SingleFunctionAbilityActivity::class.java)
-
-        intent.putExtra("subjectId", subjectId)
-        intent.putExtra("functionAbilityId", functionAbility.id)
-        intent.putExtra("functionAbilityTitle", functionAbility.title)
-
-        startActivity(intent)
     }
 
     private fun createNavigationBar() {
@@ -100,6 +100,4 @@ class FunctionAbilityActivity : AppCompatActivity() {
         finish()
         return super.onSupportNavigateUp()
     }
-
-
 }

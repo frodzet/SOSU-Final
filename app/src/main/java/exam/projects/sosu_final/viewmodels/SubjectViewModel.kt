@@ -34,6 +34,7 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
 
     /* FUNCTION ABILITIES */
     val getAllFunctionAbilitiesResponse: MutableLiveData<Response<List<FunctionAbility>>> = MutableLiveData()
+    val getOneFunctionAbilityResponse: MutableLiveData<Response<FunctionAbility>> = MutableLiveData()
 
     fun getOne(subjectId: String) {
         viewModelScope.launch {
@@ -200,6 +201,21 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 return@launch
             } catch (e: HttpException) {
                 Log.e(TAG, "getAllFunctionAbilities: $IOException")
+                return@launch
+            }
+        }
+    }
+
+    fun getAllFunctionAbilityItems(subjectId: String, functionAbilityId: String) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.getOneFunctionAbility(subjectId, functionAbilityId)
+                getOneFunctionAbilityResponse.value = response!!
+            } catch (e: IOException) {
+                Log.e(TAG, "getOneFunctionAbility: $IOException", )
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "getOneFunctionAbility: $IOException")
                 return@launch
             }
         }

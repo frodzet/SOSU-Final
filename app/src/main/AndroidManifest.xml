@@ -17,6 +17,9 @@
         android:theme="@style/Theme.AppCompat.DayNight"
         tools:targetApi="31">
         <activity
+            android:name=".activities.functionability.SingleFunctionAbilityActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.functionability.FunctionAbilityActivity"
             android:exported="false" />
         <activity

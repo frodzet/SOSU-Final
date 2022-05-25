@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 data class FunctionAbilityItem(
     @SerializedName("_id")
     val id: String,
-    val currentLevel: Number,
+    val currentLevel: Int,
     val execution: String,
-    val expectedLevel: Number,
+    val expectedLevel: Int,
     val meaningOfExecution: String,
     val note: String,
     val subTitle: String,

@@ -52,4 +52,8 @@ class SubjectRepository {
     suspend fun getAllFunctionAbilities(subjectId: String): Response<List<FunctionAbility>> {
         return RetrofitInstance.subjectApi.getAllFunctionAbilities(subjectId)
     }
+
+    suspend fun getOneFunctionAbility(subjectId: String, functionAbilityId: String): Response<FunctionAbility>? {
+        return RetrofitInstance.subjectApi.getOneFunctionAbility(subjectId, functionAbilityId)
+    }
 }

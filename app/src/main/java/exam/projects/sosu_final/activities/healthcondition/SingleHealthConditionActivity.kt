@@ -34,20 +34,11 @@ class SingleHealthConditionActivity : AppCompatActivity() {
     private val singleHealthConditionAdapter by lazy {
         SingleHealthConditionAdapter(listener = {
             lastClickedHealthConditionItem = it
-            healthConditionItem(lastClickedHealthConditionItem)
+            updateHealthConditionItem(lastClickedHealthConditionItem)
         })
     }
 
-    private fun healthConditionItem(healthConditionItem: HealthConditionItem) {
-        subjectViewModel.updateHealthConditionItem(
-            subjectId,
-            healthConditionId,
-            healthConditionItem.id,
-            HealthConditionItemDto(healthConditionItem.comment, healthConditionItem.reason, healthConditionItem.relevant)
-        )
 
-        Toast.makeText(this@SingleHealthConditionActivity, "${healthConditionItem.subTitle} er blevet opdateret!", Toast.LENGTH_SHORT).show()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +86,17 @@ class SingleHealthConditionActivity : AppCompatActivity() {
         activityBinding.apply {
             textViewHealthConditionTitle.text = healthConditionTitle
         }
+    }
+
+    private fun updateHealthConditionItem(healthConditionItem: HealthConditionItem) {
+        subjectViewModel.updateHealthConditionItem(
+            subjectId,
+            healthConditionId,
+            healthConditionItem.id,
+            HealthConditionItemDto(healthConditionItem.comment, healthConditionItem.reason, healthConditionItem.relevant)
+        )
+
+        Toast.makeText(this@SingleHealthConditionActivity, "${healthConditionItem.subTitle} er blevet opdateret!", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupRecyclerView() {

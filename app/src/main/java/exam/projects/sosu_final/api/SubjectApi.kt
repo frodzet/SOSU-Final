@@ -40,4 +40,7 @@ interface SubjectApi {
 
     @GET("subjects/{subjectId}/function-abilities")
     suspend fun getAllFunctionAbilities(@Path("subjectId") subjectId: String): Response<List<FunctionAbility>>
+
+    @GET("subjects/{subjectId}/function-abilities/{functionAbilityId}")
+    suspend fun getOneFunctionAbility(@Path("subjectId") subjectId: String, @Path("functionAbilityId") functionAbilityId: String): Response<FunctionAbility>
 }

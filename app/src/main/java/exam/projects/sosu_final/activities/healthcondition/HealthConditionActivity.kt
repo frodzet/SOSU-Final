@@ -29,7 +29,7 @@ class HealthConditionActivity : AppCompatActivity() {
     private val healthConditionAdapter by lazy {
         HealthConditionAdapter(listener = {
 //            lastClickedHealthCondition = it
-            startActivtySingleHealthCondition(it)
+            startActivitySingleHealthCondition(it)
         })
     }
 
@@ -86,7 +86,7 @@ class HealthConditionActivity : AppCompatActivity() {
         }
     }
 
-    private fun startActivtySingleHealthCondition(healthCondition: HealthCondition) {
+    private fun startActivitySingleHealthCondition(healthCondition: HealthCondition) {
         val intent: Intent = Intent(this@HealthConditionActivity, SingleHealthConditionActivity::class.java)
 
         intent.putExtra("subjectId", subjectId)
