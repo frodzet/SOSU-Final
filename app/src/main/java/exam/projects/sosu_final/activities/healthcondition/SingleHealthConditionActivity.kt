@@ -93,7 +93,7 @@ class SingleHealthConditionActivity : AppCompatActivity() {
         })
 
         activityBinding.apply {
-
+            textViewHealthConditionTitle.text = healthConditionTitle
         }
     }
 
