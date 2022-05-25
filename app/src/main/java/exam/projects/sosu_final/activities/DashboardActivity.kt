@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package exam.projects.sosu_final.activities
 
 import android.content.Intent
@@ -20,7 +22,7 @@ import exam.projects.sosu_final.repositories.entities.Subject
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
 
-const val GET_PROFILE_DATA = 100
+const val ADD_SUBJECT_DATA = 100
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var subjectViewModel: SubjectViewModel
@@ -74,6 +76,10 @@ class DashboardActivity : AppCompatActivity() {
                 openAddSubject()
                 true
             }
+            R.id.itemUpdate -> {
+                getAllSubjects()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -84,6 +90,13 @@ class DashboardActivity : AppCompatActivity() {
         intent.putExtra("subjectId", subject.id)
 
         startActivity(intent)
+    }
+
+    private fun openAddSubject() {
+        val intent = Intent(this@DashboardActivity, AddSubjectActivity::class.java)
+        intent.action = Intent.ACTION_GET_CONTENT
+
+        startActivityForResult(intent, ADD_SUBJECT_DATA)
     }
 
     /* HttpClient */
@@ -98,20 +111,21 @@ class DashboardActivity : AppCompatActivity() {
         })
     }
 
-    fun openAddSubject() {
-        val intent = Intent(this@DashboardActivity, AddSubjectActivity::class.java)
-        intent.action = Intent.ACTION_GET_CONTENT
-
-        startActivityForResult(intent, GET_PROFILE_DATA)
-    }
-
     private fun addSubject(data: Intent?) {
+        val firstName = data?.getStringExtra("firstName")!!
+        val lastName = data.getStringExtra("lastName")!!
+        val email = data.getStringExtra("email")!!
+        val phone = data.getStringExtra("phone")!!
+        val city = data.getStringExtra("city")!!
+        val street = data.getStringExtra("street")!!
+        val postCode = data.getIntExtra("postCode", 0)!!
+
         val subjectDto = SubjectDto(
-            "Mikkel",
-            "Hansen",
-            "Mikkel@hansen.dk",
-            "50 50 50 50",
-            AddressDto("Mikkel Castle Rock", 6800, "Mikkel Awesome Street")
+            firstName,
+            lastName,
+            email,
+            phone,
+            AddressDto(city, postCode, street)
         )
         subjectViewModel.addSubject(subjectDto)
         subjectViewModel.addSubjectResponse.observe(this@DashboardActivity, Observer { response ->
@@ -128,7 +142,7 @@ class DashboardActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
-            if (requestCode == GET_PROFILE_DATA) {
+            if (requestCode == ADD_SUBJECT_DATA) {
                 addSubject(data)
             }
         }

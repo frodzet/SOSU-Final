@@ -1,14 +1,15 @@
 package exam.projects.sosu_final.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.core.view.allViews
 import androidx.lifecycle.ViewModelProvider
 import exam.projects.sosu_final.databinding.ActivityAddSubjectBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
-import exam.projects.sosu_final.repositories.dtos.AddressDto
-import exam.projects.sosu_final.repositories.dtos.SubjectDto
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
 
@@ -20,6 +21,8 @@ class AddSubjectActivity : AppCompatActivity() {
         activityBinding = ActivityAddSubjectBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
 
+        createNavigationBar()
+
         val subjectRepository = SubjectRepository()
         val viewModelFactory = SubjectViewModelFactory(subjectRepository)
         subjectViewModel =
@@ -27,46 +30,41 @@ class AddSubjectActivity : AppCompatActivity() {
 
         activityBinding.apply {
             buttonSave.setOnClickListener {
-                addSubject(
-                    editTextFirstName.text.toString(),
-                    editTextLastName.text.toString(),
-                    editTextEmail.text.toString(),
-                    editTextPhone.text.toString(),
-                    editTextCity.text.toString(),
-                    editTextStreet.text.toString(),
-                    editTextPostCode.text.toString().toInt()
-                )
-                setResult(RESULT_OK)
+                for (view in activityBinding.root.allViews) {
+                    if (view is EditText && view.text.isNullOrEmpty()) {
+                        if (view.text.isNullOrEmpty()) {
+                            Toast.makeText(
+                                this@AddSubjectActivity,
+                                "${view.hint} mangler at blive udfyldt!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            return@setOnClickListener
+                        }
+                    }
+                }
+
+                val intent = Intent()
+                intent.putExtra("firstName", editTextFirstName.text.toString())
+                intent.putExtra("lastName", editTextLastName.text.toString())
+                intent.putExtra("email", editTextEmail.text.toString())
+                intent.putExtra("phone", editTextPhone.text.toString())
+                intent.putExtra("city", editTextCity.text.toString())
+                intent.putExtra("street", editTextStreet.text.toString())
+                intent.putExtra("postCode", editTextPostCode.text.toString().toIntOrNull() ?: 0)
+
+                setResult(RESULT_OK, intent)
                 finish()
             }
         }
-
     }
 
-    private fun addSubject(
-        firstName: String,
-        lastName: String,
-        email: String,
-        phone: String,
-        city: String,
-        street: String,
-        postCode: Int
-    ) {
-        val subjectDto = SubjectDto(
-            firstName,
-            lastName,
-            email,
-            phone,
-            AddressDto(city, postCode, street)
-        )
-        subjectViewModel.addSubject(subjectDto)
-        subjectViewModel.addSubjectResponse.observe(this@AddSubjectActivity, Observer { response ->
-            if (response.isSuccessful) {
-                Toast.makeText(this@AddSubjectActivity, "Borger tilføjet!", Toast.LENGTH_SHORT)
-                    .show()
-            } else {
-                Toast.makeText(this@AddSubjectActivity, "Prøv igen!", Toast.LENGTH_SHORT).show()
-            }
-        })
+    private fun createNavigationBar() {
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

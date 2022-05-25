@@ -3,12 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Datamatiker/SOSU-Final/app/src/main/res/layout/activity_add_friend.xml" value="0.18802083333333333" />
-        <entry key="..\:/Datamatiker/SOSU-Final/app/src/main/res/layout/activity_add_subject.xml" value="0.18802083333333333" />
-        <entry key="..\:/Datamatiker/SOSU-Final/app/src/main/res/layout/activity_dashboard.xml" value="0.18802083333333333" />
-        <entry key="..\:/Datamatiker/SOSU-Final/app/src/main/res/layout/subject_about_item.xml" value="0.33" />
+        <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_add_subject.xml" value="0.176" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_dashboard.xml" value="0.11302083333333333" />
-        <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_general_information.xml" value="0.1" />
+        <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_general_information.xml" value="0.264" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/activity_subject.xml" value="0.1" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/general_information_item.xml" value="0.264" />
         <entry key="..\:/Datamatiker/SOSUFinal/app/src/main/res/layout/subject_about_item.xml" value="0.264" />

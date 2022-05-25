@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +29,8 @@ class SubjectActivity : AppCompatActivity() {
         activityBinding = ActivitySubjectBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
         subjectId = intent.getStringExtra("subjectId")!!
+
+        createNavigationBar()
 
         val subjectRepository = SubjectRepository()
         val viewModelFactory = SubjectViewModelFactory(subjectRepository)
@@ -60,5 +63,15 @@ class SubjectActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
+    }
+
+    private fun createNavigationBar() {
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

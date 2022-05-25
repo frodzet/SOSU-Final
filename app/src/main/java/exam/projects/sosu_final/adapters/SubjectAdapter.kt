@@ -55,12 +55,9 @@ class SubjectAdapter(val context: DashboardActivity, val listener: (Subject, Int
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-
     var allSubjects: List<Subject>
         get() = differ.currentList
         set(value) {
             differ.submitList(value)
         }
-
-
 }

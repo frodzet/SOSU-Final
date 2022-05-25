@@ -16,4 +16,5 @@
     <string name="city">By</string>
     <string name="street">Gade</string>
     <string name="post_code">Postnummer</string>
+    <string name="refresh">Opdater Listen</string>
 </resources>
