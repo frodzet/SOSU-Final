@@ -41,6 +41,12 @@ class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit):
                         editTextComment.text.append(healthConditionItem.comment)
                     if(!editTextReason.text.toString().contains(healthConditionItem.reason))
                         editTextReason.text.append(healthConditionItem.reason)
+                    if(healthConditionItem.relevant == 0)
+                        radioButtonNotRelevant.isChecked = true
+                    if(healthConditionItem.relevant == 1)
+                        radioButtonPotential.isChecked = true
+                    if(healthConditionItem.relevant == 2)
+                        radioButtonRelevant.isChecked = true
                 } else {
                     editTextComment.visibility = View.GONE
                     editTextReason.visibility = View.GONE

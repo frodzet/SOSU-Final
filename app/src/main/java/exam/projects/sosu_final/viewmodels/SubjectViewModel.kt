@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import exam.projects.sosu_final.repositories.entities.Subject
 import exam.projects.sosu_final.repositories.SubjectRepository
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
+import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
 import exam.projects.sosu_final.repositories.entities.GeneralInformation
 import exam.projects.sosu_final.repositories.entities.HealthCondition
@@ -32,6 +33,7 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
     /* HEALTH CONDITIONS */
     val getAllHealthConditionsResponse: MutableLiveData<Response<List<HealthCondition>>> = MutableLiveData()
     val getOneHealthConditionResponse: MutableLiveData<Response<HealthCondition>> = MutableLiveData()
+    val updateHealthConditionResponse: MutableLiveData<Response<HealthConditionItemDto>> = MutableLiveData()
 
     fun getOne(subjectId: String) {
         viewModelScope.launch {
@@ -162,12 +164,27 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
         viewModelScope.launch {
             try {
                 val response = subjectRepository.getOneHealthCondition(subjectId, healthConditionId)
-                getOneHealthConditionResponse.value = response
+                getOneHealthConditionResponse.value = response!!
             } catch (e: IOException) {
                 Log.e(TAG, "updateGeneralInformation: $IOException", )
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG, "addSubject: $IOException")
+                Log.e(TAG, "updateGeneralInformation: $IOException")
+                return@launch
+            }
+        }
+    }
+
+    fun updateHealthConditionItem(subjectId: String, healthConditionId: String, healthConditionItemId: String, healthConditionItemDto: HealthConditionItemDto) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.updateHealthConditionItem(subjectId, healthConditionId, healthConditionItemId, healthConditionItemDto)
+                updateHealthConditionResponse.value = response
+            } catch (e: IOException) {
+                Log.e(TAG, "updateHealthConditionItem: $IOException", )
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "updateHealthConditionItem: $IOException")
                 return@launch
             }
         }

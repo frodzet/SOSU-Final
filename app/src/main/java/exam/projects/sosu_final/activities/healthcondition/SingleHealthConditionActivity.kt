@@ -11,6 +11,8 @@ import exam.projects.sosu_final.adapters.healthcondition.SingleHealthConditionAd
 import exam.projects.sosu_final.databinding.ActivityHealthConditionBinding
 import exam.projects.sosu_final.databinding.ActivitySingleHealthConditionBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
+import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
+import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.entities.HealthCondition
 import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
@@ -27,8 +29,19 @@ class SingleHealthConditionActivity : AppCompatActivity() {
     private val singleHealthConditionAdapter by lazy {
         SingleHealthConditionAdapter(listener = {
             lastClickedHealthConditionItem = it
-            Toast.makeText(this@SingleHealthConditionActivity, lastClickedHealthConditionItem.id, Toast.LENGTH_SHORT).show()
+            healthConditionItem(lastClickedHealthConditionItem)
         })
+    }
+
+    private fun healthConditionItem(healthConditionItem: HealthConditionItem) {
+        subjectViewModel.updateHealthConditionItem(
+            subjectId,
+            healthConditionId,
+            healthConditionItem.id,
+            HealthConditionItemDto(healthConditionItem.comment, healthConditionItem.reason, healthConditionItem.relevant)
+        )
+
+        Toast.makeText(this@SingleHealthConditionActivity, "${healthConditionItem.subTitle} er blevet opdateret!", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,8 +70,6 @@ class SingleHealthConditionActivity : AppCompatActivity() {
         activityBinding.apply {
             textViewHealthConditionTitle.text = healthConditionTitle
         }
-
-        Toast.makeText(this@SingleHealthConditionActivity, "${subjectId} ${healthConditionId}", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupRecyclerView() {

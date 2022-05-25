@@ -1,6 +1,7 @@
 package exam.projects.sosu_final.api
 
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
+import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
 import exam.projects.sosu_final.repositories.entities.GeneralInformation
 import exam.projects.sosu_final.repositories.entities.HealthCondition
@@ -36,4 +37,7 @@ interface SubjectApi {
 
     @GET("subjects/{subjectId}/health-conditions/{healthConditionId}")
     suspend fun getOneHealthCondition(@Path("subjectId") subjectId: String, @Path("healthConditionId") healthConditionId: String): Response<HealthCondition>
+
+    @PATCH("subjects/{subjectId}/health-conditions/{healthConditionId}/{healthConditionItemId}")
+    suspend fun updateHealthConditionItem(@Path("subjectId") subjectId: String, @Path("healthConditionId") healthConditionId: String, @Path("healthConditionItemId") healthConditionItemId: String, @Body healthConditionItemDto: HealthConditionItemDto): Response<HealthConditionItemDto>
 }
