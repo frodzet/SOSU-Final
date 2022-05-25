@@ -24,4 +24,8 @@
     <string name="relevant">Relevant</string>
     <string name="category">Kategori</string>
     <string name="function_ability">Funktionsevnetilstand</string>
+    <string name="current_level">Nuværende Niveau:</string>
+    <string name="expected_level">Forventet Niveau:</string>
+    <string name="subject_evaluation">Borgerens Vurdering</string>
+    <string name="execution">Udførelse:</string>
 </resources>

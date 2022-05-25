@@ -15,7 +15,9 @@ import exam.projects.sosu_final.databinding.ActivitySingleFunctionAbilityBinding
 import exam.projects.sosu_final.databinding.ActivitySingleHealthConditionBinding
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
+import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.entities.FunctionAbilityItem
+import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
 
@@ -79,15 +81,26 @@ class SingleFunctionAbilityActivity : AppCompatActivity() {
         })
 
         activityBinding.apply {
-
+            textViewTitle.text = functionAbilityTitle
         }
     }
 
     private fun setupRecyclerView() {
         this.activityBinding.apply {
-            recyclerViewNewTest.adapter = singleFunctionAbilityAdapter
-            recyclerViewNewTest.layoutManager = LinearLayoutManager(this@SingleFunctionAbilityActivity)
+            recyclerViewSingleFunctionAbility.adapter = singleFunctionAbilityAdapter
+            recyclerViewSingleFunctionAbility.layoutManager = LinearLayoutManager(this@SingleFunctionAbilityActivity)
         }
+    }
+
+    private fun updateFunctionAbilityItem(functionAbilityItem: FunctionAbilityItem) {
+//        subjectViewModel.updateFunctionAbilityItem(
+//            subjectId,
+//            functionAbilityId,
+//            functionAbilityItem.id,
+//            HealthConditionItemDto(functionAbilityItem.comment, functionAbilityItem.reason, functionAbilityItem.relevant)
+//        )
+//
+//        Toast.makeText(this@SingleFunctionAbilityActivity, "${functionAbilityItem.subTitle} er blevet opdateret!", Toast.LENGTH_SHORT).show()
     }
 
     private fun createNavigationBar() {
