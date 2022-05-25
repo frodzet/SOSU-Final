@@ -9,8 +9,9 @@
         android:id="@+id/buttonTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/title"
         android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="@string/title"
+        android:textColor="#4E342E"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

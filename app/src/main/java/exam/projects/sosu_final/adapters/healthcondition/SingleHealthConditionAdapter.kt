@@ -27,20 +27,17 @@ class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit):
 
     override fun onBindViewHolder(holder: SingleHealthConditionViewHolder, position: Int) {
         val healthConditionItem = healthConditionItems[position]
-
         holder.binding.apply {
+            buttonHealthConditionItem.text = healthConditionItem.subTitle
             if(!editTextComment.text.toString().contains(healthConditionItem.comment))
                 editTextComment.text.append(healthConditionItem.comment)
             if(!editTextReason.text.toString().contains(healthConditionItem.reason))
                 editTextReason.text.append(healthConditionItem.reason)
-            if(healthConditionItem.relevant == 0)
-                radioButtonNotRelevant.isChecked = true
-            if(healthConditionItem.relevant == 1)
-                radioButtonPotential.isChecked = true
-            if(healthConditionItem.relevant == 2)
-                radioButtonRelevant.isChecked = true
 
-            buttonHealthConditionItem.text = healthConditionItem.subTitle
+            radioButtonNotRelevant.isChecked = healthConditionItem.relevant == 0
+            radioButtonPotential.isChecked = healthConditionItem.relevant == 1
+            radioButtonRelevant.isChecked = healthConditionItem.relevant == 2
+
             buttonHealthConditionItem.setOnClickListener {
                 if(editTextComment.visibility == View.GONE) {
                     editTextComment.visibility = View.VISIBLE

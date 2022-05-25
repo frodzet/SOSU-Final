@@ -7,6 +7,6 @@ data class HealthConditionItem(
     val id: String,
     var comment: String,
     var reason: String,
-    var relevant: Number,
+    var relevant: Int,
     val subTitle: String
 )
