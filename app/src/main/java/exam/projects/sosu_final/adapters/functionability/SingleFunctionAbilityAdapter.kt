@@ -64,7 +64,16 @@ class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit) 
                     radioGroupExpectedLevel.visibility = View.VISIBLE
 
                     buttonSubjectEvaluation.visibility = View.VISIBLE
-//                    buttonSave.visibility = View.VISIBLE
+
+                    textViewExecution.visibility = View.VISIBLE
+                    radioGroupExecution.visibility = View.VISIBLE
+
+                    radioGroupMeaningOfExecution.visibility = View.VISIBLE
+                    textViewMeaningOfExecution.visibility = View.VISIBLE
+
+                    editTextSubjectWish.visibility = View.VISIBLE
+                    buttonSave.visibility = View.VISIBLE
+
                 } else {
                     textViewCurrentLevel.visibility = View.GONE
                     radioGroupCurrentLevel.visibility = View.GONE
@@ -85,27 +94,27 @@ class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit) 
                     buttonSave.visibility = View.GONE
                 }
             }
-            this.buttonSubjectEvaluation.setOnClickListener {
-                if (textViewExecution.visibility == View.GONE) {
-                    textViewExecution.visibility = View.VISIBLE
-                    radioGroupExecution.visibility = View.VISIBLE
-
-                    radioGroupMeaningOfExecution.visibility = View.VISIBLE
-                    textViewMeaningOfExecution.visibility = View.VISIBLE
-
-                    editTextSubjectWish.visibility = View.VISIBLE
-                    buttonSave.visibility = View.VISIBLE
-                } else {
-                    textViewExecution.visibility = View.GONE
-                    radioGroupExecution.visibility = View.GONE
-
-                    radioGroupMeaningOfExecution.visibility = View.GONE
-                    textViewMeaningOfExecution.visibility = View.GONE
-
-                    editTextSubjectWish.visibility = View.GONE
-                    buttonSave.visibility = View.GONE
-                }
-            }
+//            this.buttonSubjectEvaluation.setOnClickListener {
+//                if (textViewExecution.visibility == View.GONE) {
+//                    textViewExecution.visibility = View.VISIBLE
+//                    radioGroupExecution.visibility = View.VISIBLE
+//
+//                    radioGroupMeaningOfExecution.visibility = View.VISIBLE
+//                    textViewMeaningOfExecution.visibility = View.VISIBLE
+//
+//                    editTextSubjectWish.visibility = View.VISIBLE
+//                    buttonSave.visibility = View.VISIBLE
+//                } else {
+//                    textViewExecution.visibility = View.GONE
+//                    radioGroupExecution.visibility = View.GONE
+//
+//                    radioGroupMeaningOfExecution.visibility = View.GONE
+//                    textViewMeaningOfExecution.visibility = View.GONE
+//
+//                    editTextSubjectWish.visibility = View.GONE
+//                    buttonSave.visibility = View.GONE
+//                }
+//            }
 
             this.buttonSave.setOnClickListener {
                 val radioButtonCurrentLevelId = radioGroupCurrentLevel.checkedRadioButtonId

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="meaning_of_execution">
-        <item>Vælg betydning</item>
-        <item>Opelever ikke begrænsninger</item>
-        <item>Oplever begrænsninger</item>
-    </string-array>
-</resources>
