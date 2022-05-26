@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SOSU-Final</string>
+    <string name="app_name">SOSU System</string>
     <string name="phone">Telefonnummer</string>
     <string name="email">Email</string>
     <string name="name">Navn</string>

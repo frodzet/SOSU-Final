@@ -28,6 +28,8 @@ class GeneralInformationAdapter(val listener: (GeneralInformation) -> Unit): Rec
         holder.binding.apply {
             buttonTitle.text = generalInformation.title
             buttonTitle.tooltipText = generalInformation.description
+
+
             buttonTitle.setOnClickListener {
                 if(editTextComment.visibility == View.GONE) {
                     editTextComment.visibility = View.VISIBLE

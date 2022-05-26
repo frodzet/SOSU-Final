@@ -57,64 +57,11 @@ class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit) 
 
             this.buttonFunctionAbilityItem.setOnClickListener {
                 if (textViewCurrentLevel.visibility == View.GONE) {
-                    textViewCurrentLevel.visibility = View.VISIBLE
-                    textViewExpectedLevel.visibility = View.VISIBLE
-
-                    radioGroupCurrentLevel.visibility = View.VISIBLE
-                    radioGroupExpectedLevel.visibility = View.VISIBLE
-
-                    buttonSubjectEvaluation.visibility = View.VISIBLE
-
-                    textViewExecution.visibility = View.VISIBLE
-                    radioGroupExecution.visibility = View.VISIBLE
-
-                    radioGroupMeaningOfExecution.visibility = View.VISIBLE
-                    textViewMeaningOfExecution.visibility = View.VISIBLE
-
-                    editTextSubjectWish.visibility = View.VISIBLE
-                    buttonSave.visibility = View.VISIBLE
-
+                    showItems()
                 } else {
-                    textViewCurrentLevel.visibility = View.GONE
-                    radioGroupCurrentLevel.visibility = View.GONE
-
-                    textViewExpectedLevel.visibility = View.GONE
-                    radioGroupExpectedLevel.visibility = View.GONE
-
-                    textViewExecution.visibility = View.GONE
-                    radioGroupExecution.visibility = View.GONE
-
-                    radioGroupMeaningOfExecution.visibility = View.GONE
-                    textViewMeaningOfExecution.visibility = View.GONE
-
-                    editTextSubjectWish.visibility = View.GONE
-                    buttonSave.visibility = View.GONE
-
-                    buttonSubjectEvaluation.visibility = View.GONE
-                    buttonSave.visibility = View.GONE
+                    hideItems()
                 }
             }
-//            this.buttonSubjectEvaluation.setOnClickListener {
-//                if (textViewExecution.visibility == View.GONE) {
-//                    textViewExecution.visibility = View.VISIBLE
-//                    radioGroupExecution.visibility = View.VISIBLE
-//
-//                    radioGroupMeaningOfExecution.visibility = View.VISIBLE
-//                    textViewMeaningOfExecution.visibility = View.VISIBLE
-//
-//                    editTextSubjectWish.visibility = View.VISIBLE
-//                    buttonSave.visibility = View.VISIBLE
-//                } else {
-//                    textViewExecution.visibility = View.GONE
-//                    radioGroupExecution.visibility = View.GONE
-//
-//                    radioGroupMeaningOfExecution.visibility = View.GONE
-//                    textViewMeaningOfExecution.visibility = View.GONE
-//
-//                    editTextSubjectWish.visibility = View.GONE
-//                    buttonSave.visibility = View.GONE
-//                }
-//            }
 
             this.buttonSave.setOnClickListener {
                 val radioButtonCurrentLevelId = radioGroupCurrentLevel.checkedRadioButtonId
@@ -138,11 +85,51 @@ class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit) 
                 functionAbilityItem.meaningOfExecution = radioButtonMeaningOfExecutionIndex
 
                 functionAbilityItem.subjectWish = editTextSubjectWish.text.toString()
+                hideItems()
                 listener(functionAbilityItem)
 
             }
 
         }
+    }
+
+    private fun SingleFunctionAbilityItemBinding.showItems() {
+        textViewCurrentLevel.visibility = View.VISIBLE
+        textViewExpectedLevel.visibility = View.VISIBLE
+
+        radioGroupCurrentLevel.visibility = View.VISIBLE
+        radioGroupExpectedLevel.visibility = View.VISIBLE
+
+        buttonSubjectEvaluation.visibility = View.VISIBLE
+
+        textViewExecution.visibility = View.VISIBLE
+        radioGroupExecution.visibility = View.VISIBLE
+
+        radioGroupMeaningOfExecution.visibility = View.VISIBLE
+        textViewMeaningOfExecution.visibility = View.VISIBLE
+
+        editTextSubjectWish.visibility = View.VISIBLE
+        buttonSave.visibility = View.VISIBLE
+    }
+
+    private fun SingleFunctionAbilityItemBinding.hideItems() {
+        textViewCurrentLevel.visibility = View.GONE
+        radioGroupCurrentLevel.visibility = View.GONE
+
+        textViewExpectedLevel.visibility = View.GONE
+        radioGroupExpectedLevel.visibility = View.GONE
+
+        textViewExecution.visibility = View.GONE
+        radioGroupExecution.visibility = View.GONE
+
+        radioGroupMeaningOfExecution.visibility = View.GONE
+        textViewMeaningOfExecution.visibility = View.GONE
+
+        editTextSubjectWish.visibility = View.GONE
+        buttonSave.visibility = View.GONE
+
+        buttonSubjectEvaluation.visibility = View.GONE
+        buttonSave.visibility = View.GONE
     }
 
     override fun getItemCount(): Int {
