@@ -28,4 +28,6 @@
     <string name="expected_level">Forventet Niveau:</string>
     <string name="subject_evaluation">Borgerens Vurdering</string>
     <string name="execution">Udførelse:</string>
+    <string name="meaning_of_execution">Betydning af udførelse:</string>
+    <string name="subject_wish">Borgerens ønske og mål:</string>
 </resources>

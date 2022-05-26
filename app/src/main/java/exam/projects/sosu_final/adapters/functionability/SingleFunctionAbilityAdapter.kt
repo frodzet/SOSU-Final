@@ -2,12 +2,16 @@ package exam.projects.sosu_final.adapters.functionability
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.children
+import androidx.core.view.forEach
+import androidx.core.view.get
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import exam.projects.sosu_final.R
 import exam.projects.sosu_final.databinding.SingleFunctionAbilityItemBinding
 import exam.projects.sosu_final.repositories.entities.FunctionAbilityItem
-import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 
 class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit): RecyclerView.Adapter<SingleFunctionAbilityAdapter.SingleFunctionAbilityViewHolder>() {
     inner class SingleFunctionAbilityViewHolder(val binding: SingleFunctionAbilityItemBinding): RecyclerView.ViewHolder(binding.root)
@@ -29,6 +33,9 @@ class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit):
 
         holder.binding.apply {
             buttonSubTitle.text = functionAbilityItem.subTitle
+            //Toast.makeText(holder.binding.root.context, functionAbilityItem.currentLevel.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this.root.context, spinnerCurrentLevel.selectedItem.toString(), Toast.LENGTH_SHORT).show()
+
         }
     }
 

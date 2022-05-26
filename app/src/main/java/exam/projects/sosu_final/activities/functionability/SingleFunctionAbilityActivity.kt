@@ -10,14 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import exam.projects.sosu_final.R
 import exam.projects.sosu_final.adapters.functionability.SingleFunctionAbilityAdapter
-import exam.projects.sosu_final.adapters.healthcondition.SingleHealthConditionAdapter
 import exam.projects.sosu_final.databinding.ActivitySingleFunctionAbilityBinding
-import exam.projects.sosu_final.databinding.ActivitySingleHealthConditionBinding
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
-import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.entities.FunctionAbilityItem
-import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
 
