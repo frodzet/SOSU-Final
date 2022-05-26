@@ -29,7 +29,7 @@
         android:text="@string/current_level"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonFunctionAbilityItem" />
 
@@ -42,7 +42,7 @@
         android:layout_marginEnd="8dp"
         android:baselineAligned="true"
         android:orientation="horizontal"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCurrentLevel">
@@ -112,7 +112,7 @@
         android:text="@string/expected_level"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupCurrentLevel" />
 
@@ -124,7 +124,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewExpectedLevel">
@@ -195,7 +195,7 @@
         android:backgroundTint="#73FFBB33"
         android:text="@string/subject_evaluation"
         android:textColor="#4E342E"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupExpectedLevel"
@@ -210,7 +210,7 @@
         android:text="@string/execution"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSubjectEvaluation" />
 
@@ -221,7 +221,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewExecution">
@@ -272,7 +272,7 @@
         android:text="@string/meaning_of_execution"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupExecution" />
 
@@ -283,7 +283,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewMeaningOfExecution">
@@ -322,7 +322,7 @@
         android:hint="@string/subject_wish"
         android:inputType="textMultiLine"
         android:textColorHint="#78909C"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -336,7 +336,7 @@
         android:layout_marginTop="8dp"
         android:background="@android:color/holo_orange_dark"
         android:text="@string/save"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSubjectWish" />
 
