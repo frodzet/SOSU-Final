@@ -1,6 +1,7 @@
 package exam.projects.sosu_final.repositories
 
 import exam.projects.sosu_final.api.RetrofitInstance
+import exam.projects.sosu_final.repositories.dtos.FunctionAbilityItemDto
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
@@ -55,5 +56,9 @@ class SubjectRepository {
 
     suspend fun getOneFunctionAbility(subjectId: String, functionAbilityId: String): Response<FunctionAbility>? {
         return RetrofitInstance.subjectApi.getOneFunctionAbility(subjectId, functionAbilityId)
+    }
+
+    suspend fun updateFunctionAbilityItem(subjectId: String, functionAbilityId: String, functionAbilityItemId: String, functionAbilityItemDto: FunctionAbilityItemDto): Response<FunctionAbilityItemDto> {
+        return RetrofitInstance.subjectApi.updateFunctionAbilityItem(subjectId, functionAbilityId, functionAbilityItemId, functionAbilityItemDto)
     }
 }

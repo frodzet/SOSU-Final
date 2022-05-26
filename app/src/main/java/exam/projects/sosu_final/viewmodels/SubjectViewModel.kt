@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import exam.projects.sosu_final.repositories.SubjectRepository
+import exam.projects.sosu_final.repositories.dtos.FunctionAbilityItemDto
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
@@ -35,6 +36,7 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
     /* FUNCTION ABILITIES */
     val getAllFunctionAbilitiesResponse: MutableLiveData<Response<List<FunctionAbility>>> = MutableLiveData()
     val getOneFunctionAbilityResponse: MutableLiveData<Response<FunctionAbility>> = MutableLiveData()
+    val updateFunctionAbilityResponse: MutableLiveData<Response<FunctionAbilityItemDto>> = MutableLiveData()
 
     fun getOne(subjectId: String) {
         viewModelScope.launch {
@@ -216,6 +218,21 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository): ViewMo
                 return@launch
             } catch (e: HttpException) {
                 Log.e(TAG, "getOneFunctionAbility: $IOException")
+                return@launch
+            }
+        }
+    }
+
+    fun updateFunctionAbilityItem(subjectId: String, functionAbilityId: String, functionAbilityItemId: String, functionAbilityItemDto: FunctionAbilityItemDto) {
+        viewModelScope.launch {
+            try {
+                val response = subjectRepository.updateFunctionAbilityItem(subjectId, functionAbilityId, functionAbilityItemId, functionAbilityItemDto)
+                updateFunctionAbilityResponse.value = response
+            } catch (e: IOException) {
+                Log.e(TAG, "updateHealthConditionItem: $IOException", )
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "updateHealthConditionItem: $IOException")
                 return@launch
             }
         }

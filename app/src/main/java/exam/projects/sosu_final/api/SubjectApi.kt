@@ -1,5 +1,6 @@
 package exam.projects.sosu_final.api
 
+import exam.projects.sosu_final.repositories.dtos.FunctionAbilityItemDto
 import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
@@ -43,4 +44,7 @@ interface SubjectApi {
 
     @GET("subjects/{subjectId}/function-abilities/{functionAbilityId}")
     suspend fun getOneFunctionAbility(@Path("subjectId") subjectId: String, @Path("functionAbilityId") functionAbilityId: String): Response<FunctionAbility>
+
+    @PATCH("subjects/{subjectId}/function-abilities/{functionAbilityId}/{functionAbilityItemId}")
+    suspend fun updateFunctionAbilityItem(@Path("subjectId") subjectId: String, @Path("functionAbilityId") functionAbilityId: String, @Path("functionAbilityItemId") functionAbilityItemId: String, @Body functionAbilityItemDto: FunctionAbilityItemDto) : Response<FunctionAbilityItemDto>
 }

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <Button
-        android:id="@+id/buttonSubTitle"
+        android:id="@+id/buttonFunctionAbilityItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -24,54 +24,166 @@
         android:id="@+id/textViewCurrentLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:text="@string/current_level"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSubTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonFunctionAbilityItem" />
 
-    <Spinner
-        android:id="@+id/spinnerCurrentLevel"
+    <RadioGroup
+        android:id="@+id/radioGroupCurrentLevel"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:entries="@array/current_level"
-        android:minHeight="48dp"
-        android:spinnerMode="dialog"
+        android:baselineAligned="true"
+        android:orientation="horizontal"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewCurrentLevel"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSubTitle"
-        tools:ignore="DuplicateSpeakableTextCheck,DuplicateClickableBoundsCheck" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentLevel">
+
+        <RadioButton
+            android:id="@+id/radioButtonCurrentLevel0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/radioButtonCurrentLevel1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/radioButtonCurrentLevel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/radioButtonCurrentLevel3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="3"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/radioButtonCurrentLevel4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="4"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/textViewExpectedLevel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/expected_level"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerExpectedLevel"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentLevel" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupCurrentLevel" />
 
-    <Spinner
-        android:id="@+id/spinnerExpectedLevel"
+    <RadioGroup
+        android:id="@+id/radioGroupExpectedLevel"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:entries="@array/current_level"
-        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/spinnerCurrentLevel"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCurrentLevel" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewExpectedLevel">
+
+        <RadioButton
+            android:id="@+id/radioButtonExpectedLevel0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/radioButtonExpectedLevel1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/radioButtonExpectedLevel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/radioButtonExpectedLevel3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="3"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/radioButtonExpectedLevel4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="4"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="TouchTargetSizeCheck" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/buttonSubjectEvaluation"
@@ -83,90 +195,149 @@
         android:backgroundTint="#73FFBB33"
         android:text="@string/subject_evaluation"
         android:textColor="#4E342E"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerExpectedLevel"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupExpectedLevel"
         tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/textViewExecution"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/execution"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerExecution"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSubjectEvaluation" />
 
-    <Spinner
-        android:id="@+id/spinnerExecution"
+    <RadioGroup
+        android:id="@+id/radioGroupExecution"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:entries="@array/execution"
-        android:minHeight="48dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/spinnerExpectedLevel"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSubjectEvaluation"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewExecution">
+
+        <RadioButton
+            android:id="@+id/radioButtonExecution0"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Ikke relevant"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <RadioButton
+            android:id="@+id/radioButtonExecution1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Udfører ikke selv"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <RadioButton
+            android:id="@+id/radioButtonExecution2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Udfører dele selv"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <RadioButton
+            android:id="@+id/radioButtonExecution3"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Udfører selv"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/textViewMeaningOfExecution"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/meaning_of_execution"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerExecution2"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewExecution" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupExecution" />
 
-    <Spinner
-        android:id="@+id/spinnerExecution2"
+    <RadioGroup
+        android:id="@+id/radioGroupMeaningOfExecution"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="8dp"
-        android:entries="@array/meaning_of_execution"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/spinnerExecution"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerExecution"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMeaningOfExecution">
+
+        <RadioButton
+            android:id="@+id/radioButtonMeaningOfExecution0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Oplever begrænsninger"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <RadioButton
+            android:id="@+id/radioButtonMeaningOfExecution1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Oplever ikke begrænsninger"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editTextSubjectWish"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:autofillHints=""
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/subject_wish"
         android:inputType="textMultiLine"
+        android:textColorHint="#78909C"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMeaningOfExecution" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupMeaningOfExecution" />
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/holo_orange_dark"
         android:text="@string/save"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextSubjectWish" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

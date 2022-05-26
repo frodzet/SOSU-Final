@@ -13,6 +13,7 @@ import exam.projects.sosu_final.adapters.functionability.SingleFunctionAbilityAd
 import exam.projects.sosu_final.databinding.ActivitySingleFunctionAbilityBinding
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
+import exam.projects.sosu_final.repositories.dtos.FunctionAbilityItemDto
 import exam.projects.sosu_final.repositories.entities.FunctionAbilityItem
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
@@ -29,7 +30,7 @@ class SingleFunctionAbilityActivity : AppCompatActivity() {
     private val singleFunctionAbilityAdapter by lazy {
         SingleFunctionAbilityAdapter(listener = {
             lastClickedFunctionAbility = it
-//            healthConditionItem(lastClickedHealthConditionItem)
+            updateFunctionAbilityItem(it)
         })
     }
 
@@ -89,14 +90,19 @@ class SingleFunctionAbilityActivity : AppCompatActivity() {
     }
 
     private fun updateFunctionAbilityItem(functionAbilityItem: FunctionAbilityItem) {
-//        subjectViewModel.updateFunctionAbilityItem(
-//            subjectId,
-//            functionAbilityId,
-//            functionAbilityItem.id,
-//            HealthConditionItemDto(functionAbilityItem.comment, functionAbilityItem.reason, functionAbilityItem.relevant)
-//        )
-//
-//        Toast.makeText(this@SingleFunctionAbilityActivity, "${functionAbilityItem.subTitle} er blevet opdateret!", Toast.LENGTH_SHORT).show()
+        subjectViewModel.updateFunctionAbilityItem(
+            subjectId,
+            functionAbilityId,
+            functionAbilityItem.id,
+            FunctionAbilityItemDto(
+                functionAbilityItem.currentLevel,
+                functionAbilityItem.expectedLevel,
+                functionAbilityItem.execution,
+                functionAbilityItem.meaningOfExecution,
+                functionAbilityItem.subjectWish)
+        )
+
+        Toast.makeText(this@SingleFunctionAbilityActivity, "${functionAbilityItem.subTitle} er blevet opdateret!", Toast.LENGTH_SHORT).show()
     }
 
     private fun createNavigationBar() {
