@@ -2,6 +2,7 @@ package exam.projects.sosu_final.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -29,7 +30,7 @@ class AddSubjectActivity : AppCompatActivity() {
             ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
 
         activityBinding.apply {
-            buttonSave.setOnClickListener {
+            this.buttonSave.setOnClickListener {
                 for (view in activityBinding.root.allViews) {
                     if (view is EditText && view.text.isNullOrEmpty()) {
                         if (view.text.isNullOrEmpty()) {

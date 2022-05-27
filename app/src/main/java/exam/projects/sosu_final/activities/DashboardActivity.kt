@@ -31,7 +31,7 @@ class DashboardActivity : AppCompatActivity() {
     private var lastClickedSubjectIndex: Int = 0
 
     private val subjectsAdapter by lazy {
-        SubjectAdapter(this, listener = { subject: Subject, position: Int ->
+        SubjectAdapter(listener = { subject: Subject, position: Int ->
             lastClickedSubject = subject
             lastClickedSubjectIndex = position
             startSubjectActivity(subject)

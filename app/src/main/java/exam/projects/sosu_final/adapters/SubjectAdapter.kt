@@ -10,7 +10,7 @@ import exam.projects.sosu_final.activities.DashboardActivity
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.entities.Subject
 
-class SubjectAdapter(val context: DashboardActivity, val listener: (Subject, Int) -> Unit):  RecyclerView.Adapter<SubjectAdapter.SubjectsViewHolder>(){
+class SubjectAdapter(val listener: (Subject, Int) -> Unit):  RecyclerView.Adapter<SubjectAdapter.SubjectsViewHolder>(){
 
     inner class SubjectsViewHolder(val binding: SubjectAboutItemBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -36,7 +36,6 @@ class SubjectAdapter(val context: DashboardActivity, val listener: (Subject, Int
             textViewEmail.text = "${subject.email}"
             textViewAddress.text = "${subject.address.street}, ${subject.address.postCode}, ${subject.address.city}"
         }
-
     }
 
     override fun getItemCount(): Int {
