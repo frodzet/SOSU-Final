@@ -27,13 +27,9 @@ const val ADD_SUBJECT_DATA = 100
 class DashboardActivity : AppCompatActivity() {
     private lateinit var subjectViewModel: SubjectViewModel
     private lateinit var activityBinding: ActivityDashboardBinding
-    private lateinit var lastClickedSubject: Subject
-    private var lastClickedSubjectIndex: Int = 0
 
     private val subjectsAdapter by lazy {
         SubjectAdapter(listener = { subject: Subject, position: Int ->
-            lastClickedSubject = subject
-            lastClickedSubjectIndex = position
             startSubjectActivity(subject)
         })
     }
@@ -42,27 +38,48 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityBinding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
-        setupRecyclerView()
 
+        setupViewModel()
+        getAllSubjects()
+        setupRecyclerView()
+    }
+
+    private fun setupViewModel() {
         val subjectRepository = SubjectRepository()
         val viewModelFactory = SubjectViewModelFactory(subjectRepository)
         subjectViewModel =
-            ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
-
-
-        getAllSubjects()
+            ViewModelProvider(
+                this@DashboardActivity,
+                viewModelFactory
+            )[SubjectViewModel::class.java]
     }
 
+    private fun getAllSubjects() {
+        subjectViewModel.getAll()
+        subjectViewModel.getAllSubjectsResponse.observe(this, Observer { response ->
+            if (response.isSuccessful) {
+                subjectsAdapter.allSubjects = response.body()!!
+            } else {
+                Toast.makeText(this, "Prøv igen", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
 
     private fun setupRecyclerView() {
         this.activityBinding.apply {
-
             recyclerViewSubjects.adapter = subjectsAdapter
             recyclerViewSubjects.layoutManager = LinearLayoutManager(this@DashboardActivity)
         }
     }
 
-    /* MENU */
+    private fun startSubjectActivity(subject: Subject) {
+        val intent = Intent(this@DashboardActivity, SubjectActivity::class.java)
+
+        intent.putExtra("subjectId", subject.id)
+
+        startActivity(intent)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
@@ -84,31 +101,19 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    private fun startSubjectActivity(subject: Subject) {
-        val intent = Intent(this@DashboardActivity, SubjectActivity::class.java)
-
-        intent.putExtra("subjectId", subject.id)
-
-        startActivity(intent)
-    }
-
     private fun openAddSubject() {
         val intent = Intent(this@DashboardActivity, AddSubjectActivity::class.java)
-        intent.action = Intent.ACTION_GET_CONTENT
 
         startActivityForResult(intent, ADD_SUBJECT_DATA)
     }
 
-    /* HttpClient */
-    private fun getAllSubjects() {
-        subjectViewModel.getAll()
-        subjectViewModel.getAllSubjectsResponse.observe(this, Observer { response ->
-            if (response.isSuccessful) {
-                subjectsAdapter.allSubjects = response.body()!!
-            } else {
-                Toast.makeText(this, "Prøv igen", Toast.LENGTH_LONG).show()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            if (requestCode == ADD_SUBJECT_DATA) {
+                addSubject(data)
             }
-        })
+        }
     }
 
     private fun addSubject(data: Intent?) {
@@ -127,24 +132,14 @@ class DashboardActivity : AppCompatActivity() {
             phone,
             AddressDto(city, postCode, street)
         )
+
         subjectViewModel.addSubject(subjectDto)
-        subjectViewModel.addSubjectResponse.observe(this@DashboardActivity, Observer { response ->
-            if (response.isSuccessful) {
-                Toast.makeText(this@DashboardActivity, "Borger tilføjet!", Toast.LENGTH_SHORT)
-                    .show()
-                getAllSubjects()
-            } else {
-                Toast.makeText(this@DashboardActivity, "Prøv igen!", Toast.LENGTH_SHORT).show()
-            }
-        })
+        Toast.makeText(
+            this@DashboardActivity,
+            "Borger: ${subjectDto.firstName} ${subjectDto.lastName} tilføjet!",
+            Toast.LENGTH_SHORT
+        )
+            .show()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            if (requestCode == ADD_SUBJECT_DATA) {
-                addSubject(data)
-            }
-        }
-    }
 }

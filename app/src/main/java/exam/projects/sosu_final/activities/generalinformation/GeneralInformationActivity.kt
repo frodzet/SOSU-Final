@@ -1,10 +1,10 @@
 package exam.projects.sosu_final.activities.generalinformation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,12 +23,10 @@ class GeneralInformationActivity : AppCompatActivity() {
     private lateinit var activityBinding: ActivityGeneralInformationBinding
     private lateinit var subjectAboutItemBinding: SubjectAboutItemBinding
     private lateinit var subjectId: String
-    private lateinit var lastClickedGeneralInformation: GeneralInformation
 
     private val generalInformationAdapter by lazy {
-        GeneralInformationAdapter(listener = {
-                lastClickedGeneralInformation = it
-                updateGeneralInformationItem(lastClickedGeneralInformation)
+        GeneralInformationAdapter(listener = { generalInformation: GeneralInformation ->
+            updateGeneralInformationItem(generalInformation)
         })
     }
 
@@ -36,29 +34,27 @@ class GeneralInformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityBinding = ActivityGeneralInformationBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
-        subjectId = intent.getStringExtra("subjectId")!!
-
-        setupRecyclerView()
         createNavigationBar()
 
+        subjectId = intent.getStringExtra("subjectId")!!
+
+        setupViewModel()
+
+        getSubject(subjectId)
+        setupSubjectView()
+
+        getAllGeneralInformation()
+        setupRecyclerView()
+    }
+
+    private fun setupViewModel() {
         val subjectRepository = SubjectRepository()
         val viewModelFactory = SubjectViewModelFactory(subjectRepository)
-        subjectViewModel = ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
+        subjectViewModel =
+            ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
+    }
 
-
-        subjectViewModel.getAllGeneralInformation(subjectId)
-        subjectViewModel.getAllGeneralInformationResponse.observe(this, Observer { response ->
-            if (response.isSuccessful) {
-                generalInformationAdapter.allGeneralInformation = response.body()!!
-            } else {
-                Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
-            }
-        })
-
-        val subjectAboutView: View = layoutInflater.inflate(R.layout.subject_about_item, null)
-        activityBinding.linearLayoutSingleSubject.addView(subjectAboutView)
-        subjectAboutItemBinding = SubjectAboutItemBinding.bind(subjectAboutView)
-
+    private fun getSubject(subjectId: String) {
         subjectViewModel.getOne(subjectId)
         subjectViewModel.getOneSubjectResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
@@ -67,7 +63,8 @@ class GeneralInformationActivity : AppCompatActivity() {
                     textViewName.text = "${subject.firstName} ${subject.lastName}"
                     textViewPhone.text = "${subject.phone}"
                     textViewEmail.text = "${subject.email}"
-                    textViewAddress.text = "${subject.address.street}, ${subject.address.postCode}, ${subject.address.street}"
+                    textViewAddress.text =
+                        "${subject.address.street}, ${subject.address.postCode}, ${subject.address.street}"
                 }
             } else {
                 Toast.makeText(this, "Subject not found!", Toast.LENGTH_LONG).show()
@@ -75,10 +72,28 @@ class GeneralInformationActivity : AppCompatActivity() {
         })
     }
 
+    private fun setupSubjectView() {
+        val subjectAboutView: View = layoutInflater.inflate(R.layout.subject_about_item, null)
+        activityBinding.linearLayoutSingleSubject.addView(subjectAboutView)
+        subjectAboutItemBinding = SubjectAboutItemBinding.bind(subjectAboutView)
+    }
+
+    private fun getAllGeneralInformation() {
+        subjectViewModel.getAllGeneralInformation(subjectId)
+        subjectViewModel.getAllGeneralInformationResponse.observe(this, Observer { response ->
+            if (response.isSuccessful) {
+                generalInformationAdapter.allGeneralInformation = response.body()!!
+            } else {
+                Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
     private fun setupRecyclerView() {
         this.activityBinding.apply {
             recyclerViewGeneralInformationItems.adapter = generalInformationAdapter
-            recyclerViewGeneralInformationItems.layoutManager = LinearLayoutManager(this@GeneralInformationActivity)
+            recyclerViewGeneralInformationItems.layoutManager =
+                LinearLayoutManager(this@GeneralInformationActivity)
         }
     }
 
@@ -88,7 +103,8 @@ class GeneralInformationActivity : AppCompatActivity() {
             generalInformation.id,
             GeneralInformationDto(generalInformation.comment)
         )
-        Toast.makeText(this, "${generalInformation.title} er blevet opdateret!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${generalInformation.title} er blevet opdateret!", Toast.LENGTH_SHORT)
+            .show()
     }
 
     private fun createNavigationBar() {

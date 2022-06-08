@@ -6,8 +6,10 @@ import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
 import exam.projects.sosu_final.repositories.dtos.SubjectDto
 import exam.projects.sosu_final.repositories.entities.*
+import exam.projects.sosu_final.viewmodels.IOException
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.io.IOException
 
 class SubjectRepository {
     suspend fun getAll(): Response<List<Subject>> {
@@ -18,20 +20,12 @@ class SubjectRepository {
         return RetrofitInstance.subjectApi.getOne(subjectId)
     }
 
-    suspend fun addSubject(subjectDto: SubjectDto): Response<SubjectDto> {
-        return RetrofitInstance.subjectApi.addSubject(subjectDto);
-    }
-
-    suspend fun deleteSubject(subjectId: String): Response<Subject> {
-        return RetrofitInstance.subjectApi.deleteSubject(subjectId)
+    suspend fun addSubject(subjectDto: SubjectDto): Response<Subject> {
+        return RetrofitInstance.subjectApi.addSubject(subjectDto)
     }
 
     suspend fun getAllGeneralInformation(subjectId: String): Response<List<GeneralInformation>> {
         return RetrofitInstance.subjectApi.getAllGeneralInformation(subjectId)
-    }
-
-    suspend fun getOneGeneralInformation(subjectId: String, generalInformationId: String): Response<GeneralInformation> {
-        return RetrofitInstance.subjectApi.getOneGeneralInformation(subjectId, generalInformationId);
     }
 
     suspend fun updateGeneralInformation(subjectId: String, generalInformationId: String, generalInformationDto: GeneralInformationDto): Response<GeneralInformationDto> {
