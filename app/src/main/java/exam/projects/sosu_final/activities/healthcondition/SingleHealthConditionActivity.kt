@@ -9,15 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import exam.projects.sosu_final.R
-import exam.projects.sosu_final.adapters.healthcondition.HealthConditionAdapter
 import exam.projects.sosu_final.adapters.healthcondition.SingleHealthConditionAdapter
-import exam.projects.sosu_final.databinding.ActivityHealthConditionBinding
 import exam.projects.sosu_final.databinding.ActivitySingleHealthConditionBinding
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.SubjectRepository
-import exam.projects.sosu_final.repositories.dtos.GeneralInformationDto
 import exam.projects.sosu_final.repositories.dtos.HealthConditionItemDto
-import exam.projects.sosu_final.repositories.entities.HealthCondition
 import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 import exam.projects.sosu_final.viewmodels.SubjectViewModel
 import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
@@ -59,7 +55,7 @@ class SingleHealthConditionActivity : AppCompatActivity() {
         activityBinding.linearLayoutSingleSubject.addView(subjectAboutView)
         subjectAboutItemBinding = SubjectAboutItemBinding.bind(subjectAboutView)
 
-        subjectViewModel.getOne(subjectId)
+        subjectViewModel.getOneSubject(subjectId)
         subjectViewModel.getOneSubjectResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 val subject = response.body()!!
@@ -74,7 +70,7 @@ class SingleHealthConditionActivity : AppCompatActivity() {
             }
         })
 
-        subjectViewModel.getAllHealthConditionItems(subjectId, healthConditionId)
+        subjectViewModel.getOneHealthCondition(subjectId, healthConditionId)
         subjectViewModel.getOneHealthConditionResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 singleHealthConditionAdapter.healthConditionItems = response.body()?.healthConditionItems!!

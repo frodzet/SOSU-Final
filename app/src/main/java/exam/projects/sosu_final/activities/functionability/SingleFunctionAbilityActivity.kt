@@ -53,7 +53,7 @@ class SingleFunctionAbilityActivity : AppCompatActivity() {
         activityBinding.linearLayoutSingleSubject.addView(subjectAboutView)
         subjectAboutItemBinding = SubjectAboutItemBinding.bind(subjectAboutView)
 
-        subjectViewModel.getOne(subjectId)
+        subjectViewModel.getOneSubject(subjectId)
         subjectViewModel.getOneSubjectResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 val subject = response.body()!!
@@ -68,7 +68,7 @@ class SingleFunctionAbilityActivity : AppCompatActivity() {
             }
         })
 
-        subjectViewModel.getAllFunctionAbilityItems(subjectId, functionAbilityId)
+        subjectViewModel.getOneFunctionAbility(subjectId, functionAbilityId)
         subjectViewModel.getOneFunctionAbilityResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 singleFunctionAbilityAdapter.functionAbilityItems = response.body()!!.functionAbilityItems

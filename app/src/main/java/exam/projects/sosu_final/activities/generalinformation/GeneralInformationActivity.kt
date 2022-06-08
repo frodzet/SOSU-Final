@@ -55,7 +55,7 @@ class GeneralInformationActivity : AppCompatActivity() {
     }
 
     private fun getSubject(subjectId: String) {
-        subjectViewModel.getOne(subjectId)
+        subjectViewModel.getOneSubject(subjectId)
         subjectViewModel.getOneSubjectResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 val subject = response.body()!!

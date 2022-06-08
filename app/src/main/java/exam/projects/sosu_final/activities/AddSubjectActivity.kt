@@ -17,17 +17,14 @@ import exam.projects.sosu_final.viewmodels.SubjectViewModelFactory
 class AddSubjectActivity : AppCompatActivity() {
     private lateinit var activityBinding: ActivityAddSubjectBinding
     private lateinit var subjectViewModel: SubjectViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityBinding = ActivityAddSubjectBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
-
         createNavigationBar()
 
-        val subjectRepository = SubjectRepository()
-        val viewModelFactory = SubjectViewModelFactory(subjectRepository)
-        subjectViewModel =
-            ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
+        setupViewModel()
 
         activityBinding.apply {
             this.buttonSave.setOnClickListener {
@@ -57,6 +54,13 @@ class AddSubjectActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    private fun setupViewModel() {
+        val subjectRepository = SubjectRepository()
+        val viewModelFactory = SubjectViewModelFactory(subjectRepository)
+        subjectViewModel =
+            ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
     }
 
     private fun createNavigationBar() {

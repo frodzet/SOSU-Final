@@ -55,7 +55,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun getAllSubjects() {
-        subjectViewModel.getAll()
+        subjectViewModel.getAllSubjects()
         subjectViewModel.getAllSubjectsResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 subjectsAdapter.allSubjects = response.body()!!
