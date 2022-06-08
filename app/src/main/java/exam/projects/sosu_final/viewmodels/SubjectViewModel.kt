@@ -32,12 +32,16 @@ class SubjectViewModel(private val subjectRepository: SubjectRepository) : ViewM
         MutableLiveData()
 
     /* HEALTH CONDITIONS */
-    val getAllHealthConditionsResponse: MutableLiveData<Response<List<HealthCondition>>> = MutableLiveData()
-    val getOneHealthConditionResponse: MutableLiveData<Response<HealthCondition>> = MutableLiveData()
+    val getAllHealthConditionsResponse: MutableLiveData<Response<List<HealthCondition>>> =
+        MutableLiveData()
+    val getOneHealthConditionResponse: MutableLiveData<Response<HealthCondition>> =
+        MutableLiveData()
 
     /* FUNCTION ABILITIES */
-    val getAllFunctionAbilitiesResponse: MutableLiveData<Response<List<FunctionAbility>>> = MutableLiveData()
-    val getOneFunctionAbilityResponse: MutableLiveData<Response<FunctionAbility>> = MutableLiveData()
+    val getAllFunctionAbilitiesResponse: MutableLiveData<Response<List<FunctionAbility>>> =
+        MutableLiveData()
+    val getOneFunctionAbilityResponse: MutableLiveData<Response<FunctionAbility>> =
+        MutableLiveData()
 
     fun getAllSubjects() {
         viewModelScope.launch {

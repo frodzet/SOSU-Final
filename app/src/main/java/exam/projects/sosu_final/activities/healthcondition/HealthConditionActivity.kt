@@ -1,11 +1,11 @@
 package exam.projects.sosu_final.activities.healthcondition
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -92,7 +92,8 @@ class HealthConditionActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         this.activityBinding.apply {
             recyclerViewHealthCondition.adapter = healthConditionAdapter
-            recyclerViewHealthCondition.layoutManager = LinearLayoutManager(this@HealthConditionActivity)
+            recyclerViewHealthCondition.layoutManager =
+                LinearLayoutManager(this@HealthConditionActivity)
         }
     }
 

@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import exam.projects.sosu_final.databinding.GeneralInformationItemBinding
 import exam.projects.sosu_final.repositories.entities.GeneralInformation
 
-class GeneralInformationAdapter(val listener: (GeneralInformation) -> Unit): RecyclerView.Adapter<GeneralInformationAdapter.GeneralInformationViewHolder>() {
-    inner class GeneralInformationViewHolder(val binding: GeneralInformationItemBinding): RecyclerView.ViewHolder(binding.root)
+class GeneralInformationAdapter(val listener: (GeneralInformation) -> Unit) :
+    RecyclerView.Adapter<GeneralInformationAdapter.GeneralInformationViewHolder>() {
+    inner class GeneralInformationViewHolder(val binding: GeneralInformationItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,12 +33,12 @@ class GeneralInformationAdapter(val listener: (GeneralInformation) -> Unit): Rec
 
 
             buttonTitle.setOnClickListener {
-                if(editTextComment.visibility == View.GONE) {
+                if (editTextComment.visibility == View.GONE) {
                     editTextComment.visibility = View.VISIBLE
                     buttonSave.visibility = View.VISIBLE
-                    if(generalInformation.comment == null)
+                    if (generalInformation.comment == null)
                         generalInformation.comment = ""
-                    if(!editTextComment.text.toString().contains(generalInformation.comment)) {
+                    if (!editTextComment.text.toString().contains(generalInformation.comment)) {
                         editTextComment.text.append(generalInformation.comment)
                     }
                 } else {
@@ -59,11 +61,17 @@ class GeneralInformationAdapter(val listener: (GeneralInformation) -> Unit): Rec
     }
 
     val diffCallback = object : DiffUtil.ItemCallback<GeneralInformation>() {
-        override fun areItemsTheSame(oldItem: GeneralInformation, newItem: GeneralInformation): Boolean {
+        override fun areItemsTheSame(
+            oldItem: GeneralInformation,
+            newItem: GeneralInformation
+        ): Boolean {
             return oldItem.id === newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: GeneralInformation, newItem: GeneralInformation): Boolean {
+        override fun areContentsTheSame(
+            oldItem: GeneralInformation,
+            newItem: GeneralInformation
+        ): Boolean {
             return oldItem == newItem
         }
     }

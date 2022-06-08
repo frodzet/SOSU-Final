@@ -38,7 +38,8 @@ class SubjectActivity : AppCompatActivity() {
 
         this.activityBinding.apply {
             buttonGeneralInformation.setOnClickListener {
-                val intent: Intent = Intent(this@SubjectActivity, GeneralInformationActivity::class.java)
+                val intent: Intent =
+                    Intent(this@SubjectActivity, GeneralInformationActivity::class.java)
 
                 intent.putExtra("subjectId", subjectId)
 
@@ -46,7 +47,8 @@ class SubjectActivity : AppCompatActivity() {
             }
 
             buttonHealthCondition.setOnClickListener {
-                val intent: Intent = Intent(this@SubjectActivity, HealthConditionActivity::class.java)
+                val intent: Intent =
+                    Intent(this@SubjectActivity, HealthConditionActivity::class.java)
 
                 intent.putExtra("subjectId", subjectId)
 
@@ -54,7 +56,8 @@ class SubjectActivity : AppCompatActivity() {
             }
 
             buttonFunctionAbility.setOnClickListener {
-                val intent: Intent = Intent(this@SubjectActivity, FunctionAbilityActivity::class.java)
+                val intent: Intent =
+                    Intent(this@SubjectActivity, FunctionAbilityActivity::class.java)
 
                 intent.putExtra("subjectId", subjectId)
 

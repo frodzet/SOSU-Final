@@ -25,31 +25,65 @@ class SubjectRepository {
         return RetrofitInstance.subjectApi.getAllGeneralInformation(subjectId)
     }
 
-    suspend fun updateGeneralInformation(subjectId: String, generalInformationId: String, generalInformationDto: GeneralInformationDto): Response<GeneralInformation> {
-        return RetrofitInstance.subjectApi.updateGeneralInformation(subjectId, generalInformationId, generalInformationDto);
+    suspend fun updateGeneralInformation(
+        subjectId: String,
+        generalInformationId: String,
+        generalInformationDto: GeneralInformationDto
+    ): Response<GeneralInformation> {
+        return RetrofitInstance.subjectApi.updateGeneralInformation(
+            subjectId,
+            generalInformationId,
+            generalInformationDto
+        );
     }
 
     suspend fun getAllHealthConditions(subjectId: String): Response<List<HealthCondition>> {
         return RetrofitInstance.subjectApi.getAllHealthConditions(subjectId)
     }
 
-    suspend fun getOneHealthCondition(subjectId: String, healthConditionId: String): Response<HealthCondition>? {
+    suspend fun getOneHealthCondition(
+        subjectId: String,
+        healthConditionId: String
+    ): Response<HealthCondition>? {
         return RetrofitInstance.subjectApi.getOneHealthCondition(subjectId, healthConditionId);
     }
 
-    suspend fun updateHealthConditionItem(subjectId: String, healthConditionId: String, healthConditionItemId: String, healthConditionItemDto: HealthConditionItemDto): Response<HealthConditionItem> {
-        return RetrofitInstance.subjectApi.updateHealthConditionItem(subjectId, healthConditionId, healthConditionItemId, healthConditionItemDto);
+    suspend fun updateHealthConditionItem(
+        subjectId: String,
+        healthConditionId: String,
+        healthConditionItemId: String,
+        healthConditionItemDto: HealthConditionItemDto
+    ): Response<HealthConditionItem> {
+        return RetrofitInstance.subjectApi.updateHealthConditionItem(
+            subjectId,
+            healthConditionId,
+            healthConditionItemId,
+            healthConditionItemDto
+        );
     }
 
     suspend fun getAllFunctionAbilities(subjectId: String): Response<List<FunctionAbility>> {
         return RetrofitInstance.subjectApi.getAllFunctionAbilities(subjectId)
     }
 
-    suspend fun getOneFunctionAbility(subjectId: String, functionAbilityId: String): Response<FunctionAbility>? {
+    suspend fun getOneFunctionAbility(
+        subjectId: String,
+        functionAbilityId: String
+    ): Response<FunctionAbility>? {
         return RetrofitInstance.subjectApi.getOneFunctionAbility(subjectId, functionAbilityId)
     }
 
-    suspend fun updateFunctionAbilityItem(subjectId: String, functionAbilityId: String, functionAbilityItemId: String, functionAbilityItemDto: FunctionAbilityItemDto): Response<FunctionAbilityItem> {
-        return RetrofitInstance.subjectApi.updateFunctionAbilityItem(subjectId, functionAbilityId, functionAbilityItemId, functionAbilityItemDto)
+    suspend fun updateFunctionAbilityItem(
+        subjectId: String,
+        functionAbilityId: String,
+        functionAbilityItemId: String,
+        functionAbilityItemDto: FunctionAbilityItemDto
+    ): Response<FunctionAbilityItem> {
+        return RetrofitInstance.subjectApi.updateFunctionAbilityItem(
+            subjectId,
+            functionAbilityId,
+            functionAbilityItemId,
+            functionAbilityItemDto
+        )
     }
 }

@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -52,7 +50,7 @@ class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit) 
             radioButtonMeaningOfExecution0.isChecked = functionAbilityItem.meaningOfExecution == 0
             radioButtonMeaningOfExecution1.isChecked = functionAbilityItem.meaningOfExecution == 1
 
-            if(!editTextSubjectWish.text.toString().contains(functionAbilityItem.subjectWish))
+            if (!editTextSubjectWish.text.toString().contains(functionAbilityItem.subjectWish))
                 editTextSubjectWish.append(functionAbilityItem.subjectWish)
 
             this.buttonFunctionAbilityItem.setOnClickListener {
@@ -65,23 +63,34 @@ class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit) 
 
             this.buttonSave.setOnClickListener {
                 val radioButtonCurrentLevelId = radioGroupCurrentLevel.checkedRadioButtonId
-                val radioButtonCurrentLevel = radioGroupCurrentLevel.findViewById<RadioButton>(radioButtonCurrentLevelId)
-                val radioButtonCurrentLevelIndex: Int = radioGroupCurrentLevel.indexOfChild(radioButtonCurrentLevel)
+                val radioButtonCurrentLevel =
+                    radioGroupCurrentLevel.findViewById<RadioButton>(radioButtonCurrentLevelId)
+                val radioButtonCurrentLevelIndex: Int =
+                    radioGroupCurrentLevel.indexOfChild(radioButtonCurrentLevel)
                 functionAbilityItem.currentLevel = radioButtonCurrentLevelIndex;
 
                 val radioButtonExpectedLevelId = radioGroupExpectedLevel.checkedRadioButtonId
-                val radioButtonExpectedLevel = radioGroupExpectedLevel.findViewById<RadioButton>(radioButtonExpectedLevelId)
-                val radioButtonExpectedLevelIndex = radioGroupExpectedLevel.indexOfChild(radioButtonExpectedLevel)
+                val radioButtonExpectedLevel =
+                    radioGroupExpectedLevel.findViewById<RadioButton>(radioButtonExpectedLevelId)
+                val radioButtonExpectedLevelIndex =
+                    radioGroupExpectedLevel.indexOfChild(radioButtonExpectedLevel)
                 functionAbilityItem.expectedLevel = radioButtonExpectedLevelIndex
 
                 val radioButtonExecutionId = radioGroupExecution.checkedRadioButtonId
-                val radioButtonExecution = radioGroupExecution.findViewById<RadioButton>(radioButtonExecutionId)
-                val radioButtonExecutionIndex = radioGroupExecution.indexOfChild(radioButtonExecution)
+                val radioButtonExecution =
+                    radioGroupExecution.findViewById<RadioButton>(radioButtonExecutionId)
+                val radioButtonExecutionIndex =
+                    radioGroupExecution.indexOfChild(radioButtonExecution)
                 functionAbilityItem.execution = radioButtonExecutionIndex
 
-                val radioButtonMeaningOfExecutionId = radioGroupMeaningOfExecution.checkedRadioButtonId
-                val radioButtonMeaningOfExecution = radioGroupMeaningOfExecution.findViewById<RadioButton>(radioButtonMeaningOfExecutionId)
-                val radioButtonMeaningOfExecutionIndex = radioGroupMeaningOfExecution.indexOfChild(radioButtonMeaningOfExecution)
+                val radioButtonMeaningOfExecutionId =
+                    radioGroupMeaningOfExecution.checkedRadioButtonId
+                val radioButtonMeaningOfExecution =
+                    radioGroupMeaningOfExecution.findViewById<RadioButton>(
+                        radioButtonMeaningOfExecutionId
+                    )
+                val radioButtonMeaningOfExecutionIndex =
+                    radioGroupMeaningOfExecution.indexOfChild(radioButtonMeaningOfExecution)
                 functionAbilityItem.meaningOfExecution = radioButtonMeaningOfExecutionIndex
 
                 functionAbilityItem.subjectWish = editTextSubjectWish.text.toString()

@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import exam.projects.sosu_final.databinding.FunctionAbilityItemBinding
 import exam.projects.sosu_final.repositories.entities.FunctionAbility
-import exam.projects.sosu_final.repositories.entities.HealthCondition
 
-class FunctionAbilityAdapter(val listener: (FunctionAbility) -> Unit): RecyclerView.Adapter<FunctionAbilityAdapter.FunctionAbilityViewHolder>() {
-    inner class FunctionAbilityViewHolder(val binding: FunctionAbilityItemBinding): RecyclerView.ViewHolder(binding.root)
+class FunctionAbilityAdapter(val listener: (FunctionAbility) -> Unit) :
+    RecyclerView.Adapter<FunctionAbilityAdapter.FunctionAbilityViewHolder>() {
+    inner class FunctionAbilityViewHolder(val binding: FunctionAbilityItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -45,7 +46,10 @@ class FunctionAbilityAdapter(val listener: (FunctionAbility) -> Unit): RecyclerV
             return oldItem.id === newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: FunctionAbility, newItem: FunctionAbility): Boolean {
+        override fun areContentsTheSame(
+            oldItem: FunctionAbility,
+            newItem: FunctionAbility
+        ): Boolean {
             return oldItem == newItem
         }
     }

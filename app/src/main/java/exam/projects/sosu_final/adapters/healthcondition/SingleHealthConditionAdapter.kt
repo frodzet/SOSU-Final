@@ -3,17 +3,16 @@ package exam.projects.sosu_final.adapters.healthcondition
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import exam.projects.sosu_final.databinding.SingleHealthConditionItemBinding
-import exam.projects.sosu_final.repositories.entities.GeneralInformation
-import exam.projects.sosu_final.repositories.entities.HealthCondition
 import exam.projects.sosu_final.repositories.entities.HealthConditionItem
 
-class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit): RecyclerView.Adapter<SingleHealthConditionAdapter.SingleHealthConditionViewHolder>() {
-    inner class SingleHealthConditionViewHolder(val binding: SingleHealthConditionItemBinding): RecyclerView.ViewHolder(binding.root)
+class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit) :
+    RecyclerView.Adapter<SingleHealthConditionAdapter.SingleHealthConditionViewHolder>() {
+    inner class SingleHealthConditionViewHolder(val binding: SingleHealthConditionItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -29,9 +28,9 @@ class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit):
         val healthConditionItem = healthConditionItems[position]
         holder.binding.apply {
             buttonHealthConditionItem.text = healthConditionItem.subTitle
-            if(!editTextComment.text.toString().contains(healthConditionItem.comment))
+            if (!editTextComment.text.toString().contains(healthConditionItem.comment))
                 editTextComment.text.append(healthConditionItem.comment)
-            if(!editTextReason.text.toString().contains(healthConditionItem.reason))
+            if (!editTextReason.text.toString().contains(healthConditionItem.reason))
                 editTextReason.text.append(healthConditionItem.reason)
 
             radioButtonNotRelevant.isChecked = healthConditionItem.relevant == 0
@@ -39,7 +38,7 @@ class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit):
             radioButtonRelevant.isChecked = healthConditionItem.relevant == 2
 
             buttonHealthConditionItem.setOnClickListener {
-                if(editTextComment.visibility == View.GONE) {
+                if (editTextComment.visibility == View.GONE) {
                     editTextComment.visibility = View.VISIBLE
                     editTextReason.visibility = View.VISIBLE
                     radioGroupHealthCondition.visibility = View.VISIBLE
@@ -54,7 +53,7 @@ class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit):
             buttonSave.setOnClickListener {
                 healthConditionItem.comment = editTextComment.text.toString()
                 healthConditionItem.reason = editTextReason.text.toString()
-                if(radioButtonNotRelevant.isChecked) {
+                if (radioButtonNotRelevant.isChecked) {
                     healthConditionItem.relevant = 0
                 } else if (radioButtonPotential.isChecked) {
                     healthConditionItem.relevant = 1
@@ -75,11 +74,17 @@ class SingleHealthConditionAdapter(val listener: (HealthConditionItem) -> Unit):
     }
 
     val diffCallback = object : DiffUtil.ItemCallback<HealthConditionItem>() {
-        override fun areItemsTheSame(oldItem: HealthConditionItem, newItem: HealthConditionItem): Boolean {
+        override fun areItemsTheSame(
+            oldItem: HealthConditionItem,
+            newItem: HealthConditionItem
+        ): Boolean {
             return oldItem.id === newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: HealthConditionItem, newItem: HealthConditionItem): Boolean {
+        override fun areContentsTheSame(
+            oldItem: HealthConditionItem,
+            newItem: HealthConditionItem
+        ): Boolean {
             return oldItem == newItem
         }
     }

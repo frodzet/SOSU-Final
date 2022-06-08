@@ -1,11 +1,11 @@
 package exam.projects.sosu_final.activities.functionability
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,9 +25,8 @@ class FunctionAbilityActivity : AppCompatActivity() {
     private lateinit var subjectId: String
 
     private val functionAbilityAdapter by lazy {
-        FunctionAbilityAdapter(listener = {
-//            lastClickedHealthCondition = it
-            startActivitySingleAbility(it)
+        FunctionAbilityAdapter(listener = { functionAbility: FunctionAbility ->
+            startActivitySingleAbility(functionAbility)
         })
     }
 
@@ -35,19 +34,27 @@ class FunctionAbilityActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityBinding = ActivityFunctionAbilityBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
+        createNavigationBar()
         subjectId = intent.getStringExtra("subjectId")!!
 
-        setupRecyclerView()
-        createNavigationBar()
+        setupViewModel()
 
+        getSubject(subjectId)
+        setupSubjectView()
+
+        getFunctionAbilities()
+        setupRecyclerView()
+
+    }
+
+    private fun setupViewModel() {
         val subjectRepository = SubjectRepository()
         val viewModelFactory = SubjectViewModelFactory(subjectRepository)
-        subjectViewModel = ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
+        subjectViewModel =
+            ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
+    }
 
-        val subjectAboutView: View = layoutInflater.inflate(R.layout.subject_about_item, null)
-        activityBinding.linearLayoutSingleSubject.addView(subjectAboutView)
-        subjectAboutItemBinding = SubjectAboutItemBinding.bind(subjectAboutView)
-
+    private fun getSubject(subjectId: String) {
         subjectViewModel.getOneSubject(subjectId)
         subjectViewModel.getOneSubjectResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
@@ -56,13 +63,22 @@ class FunctionAbilityActivity : AppCompatActivity() {
                     textViewName.text = "${subject.firstName} ${subject.lastName}"
                     textViewPhone.text = "${subject.phone}"
                     textViewEmail.text = "${subject.email}"
-                    textViewAddress.text = "${subject.address.street}, ${subject.address.postCode}, ${subject.address.street}"
+                    textViewAddress.text =
+                        "${subject.address.street}, ${subject.address.postCode}, ${subject.address.street}"
                 }
             } else {
                 Toast.makeText(this, "Subject not found!", Toast.LENGTH_LONG).show()
             }
         })
+    }
 
+    private fun setupSubjectView() {
+        val subjectAboutView: View = layoutInflater.inflate(R.layout.subject_about_item, null)
+        activityBinding.linearLayoutSingleSubject.addView(subjectAboutView)
+        subjectAboutItemBinding = SubjectAboutItemBinding.bind(subjectAboutView)
+    }
+
+    private fun getFunctionAbilities() {
         subjectViewModel.getAllFunctionAbilities(subjectId)
         subjectViewModel.getAllFunctionAbilitiesResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
@@ -76,12 +92,13 @@ class FunctionAbilityActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         this.activityBinding.apply {
             recyclerViewFunctionAbility.adapter = functionAbilityAdapter
-            recyclerViewFunctionAbility.layoutManager = LinearLayoutManager(this@FunctionAbilityActivity)
+            recyclerViewFunctionAbility.layoutManager =
+                LinearLayoutManager(this@FunctionAbilityActivity)
         }
     }
 
     private fun startActivitySingleAbility(functionAbility: FunctionAbility) {
-        val intent: Intent = Intent(this@FunctionAbilityActivity, SingleFunctionAbilityActivity::class.java)
+        val intent = Intent(this@FunctionAbilityActivity, SingleFunctionAbilityActivity::class.java)
 
         intent.putExtra("subjectId", subjectId)
         intent.putExtra("functionAbilityId", functionAbility.id)

@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import exam.projects.sosu_final.activities.DashboardActivity
 import exam.projects.sosu_final.databinding.SubjectAboutItemBinding
 import exam.projects.sosu_final.repositories.entities.Subject
 
-class SubjectAdapter(val listener: (Subject, Int) -> Unit):  RecyclerView.Adapter<SubjectAdapter.SubjectsViewHolder>(){
+class SubjectAdapter(val listener: (Subject, Int) -> Unit) :
+    RecyclerView.Adapter<SubjectAdapter.SubjectsViewHolder>() {
 
-    inner class SubjectsViewHolder(val binding: SubjectAboutItemBinding): RecyclerView.ViewHolder(binding.root)
+    inner class SubjectsViewHolder(val binding: SubjectAboutItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -34,7 +35,8 @@ class SubjectAdapter(val listener: (Subject, Int) -> Unit):  RecyclerView.Adapte
             textViewName.text = "${subject.firstName} ${subject.lastName}"
             textViewPhone.text = "${subject.phone}"
             textViewEmail.text = "${subject.email}"
-            textViewAddress.text = "${subject.address.street}, ${subject.address.postCode}, ${subject.address.city}"
+            textViewAddress.text =
+                "${subject.address.street}, ${subject.address.postCode}, ${subject.address.city}"
         }
     }
 

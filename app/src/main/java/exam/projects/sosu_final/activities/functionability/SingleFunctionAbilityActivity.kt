@@ -38,21 +38,34 @@ class SingleFunctionAbilityActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityBinding = ActivitySingleFunctionAbilityBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
+        createNavigationBar()
         subjectId = intent.getStringExtra("subjectId")!!
         functionAbilityId = intent.getStringExtra("functionAbilityId")!!
         functionAbilityTitle = intent.getStringExtra("functionAbilityTitle")!!
 
-        setupRecyclerView()
-        createNavigationBar()
 
+        setupViewModel()
+
+        getSubject(subjectId)
+        setupSubjectView()
+
+        getFunctionAbilityItems()
+        setupRecyclerView()
+
+        activityBinding.apply {
+            textViewTitle.text = functionAbilityTitle
+        }
+
+    }
+
+    private fun setupViewModel() {
         val subjectRepository = SubjectRepository()
         val viewModelFactory = SubjectViewModelFactory(subjectRepository)
-        subjectViewModel = ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
+        subjectViewModel =
+            ViewModelProvider(this, viewModelFactory).get(SubjectViewModel::class.java)
+    }
 
-        val subjectAboutView: View = layoutInflater.inflate(R.layout.subject_about_item, null)
-        activityBinding.linearLayoutSingleSubject.addView(subjectAboutView)
-        subjectAboutItemBinding = SubjectAboutItemBinding.bind(subjectAboutView)
-
+    private fun getSubject(subjectId: String) {
         subjectViewModel.getOneSubject(subjectId)
         subjectViewModel.getOneSubjectResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
@@ -61,31 +74,39 @@ class SingleFunctionAbilityActivity : AppCompatActivity() {
                     textViewName.text = "${subject.firstName} ${subject.lastName}"
                     textViewPhone.text = "${subject.phone}"
                     textViewEmail.text = "${subject.email}"
-                    textViewAddress.text = "${subject.address.street}, ${subject.address.postCode}, ${subject.address.street}"
+                    textViewAddress.text =
+                        "${subject.address.street}, ${subject.address.postCode}, ${subject.address.street}"
                 }
             } else {
                 Toast.makeText(this, "Subject not found!", Toast.LENGTH_LONG).show()
             }
         })
+    }
 
+    private fun setupSubjectView() {
+        val subjectAboutView: View = layoutInflater.inflate(R.layout.subject_about_item, null)
+        activityBinding.linearLayoutSingleSubject.addView(subjectAboutView)
+        subjectAboutItemBinding = SubjectAboutItemBinding.bind(subjectAboutView)
+    }
+
+
+    private fun getFunctionAbilityItems() {
         subjectViewModel.getOneFunctionAbility(subjectId, functionAbilityId)
         subjectViewModel.getOneFunctionAbilityResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-                singleFunctionAbilityAdapter.functionAbilityItems = response.body()!!.functionAbilityItems
+                singleFunctionAbilityAdapter.functionAbilityItems =
+                    response.body()!!.functionAbilityItems
             } else {
                 Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
             }
         })
-
-        activityBinding.apply {
-            textViewTitle.text = functionAbilityTitle
-        }
     }
 
     private fun setupRecyclerView() {
         this.activityBinding.apply {
             recyclerViewSingleFunctionAbility.adapter = singleFunctionAbilityAdapter
-            recyclerViewSingleFunctionAbility.layoutManager = LinearLayoutManager(this@SingleFunctionAbilityActivity)
+            recyclerViewSingleFunctionAbility.layoutManager =
+                LinearLayoutManager(this@SingleFunctionAbilityActivity)
         }
     }
 
@@ -99,10 +120,15 @@ class SingleFunctionAbilityActivity : AppCompatActivity() {
                 functionAbilityItem.expectedLevel,
                 functionAbilityItem.execution,
                 functionAbilityItem.meaningOfExecution,
-                functionAbilityItem.subjectWish)
+                functionAbilityItem.subjectWish
+            )
         )
 
-        Toast.makeText(this@SingleFunctionAbilityActivity, "${functionAbilityItem.subTitle} er blevet opdateret!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            this@SingleFunctionAbilityActivity,
+            "${functionAbilityItem.subTitle} er blevet opdateret!",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun createNavigationBar() {
