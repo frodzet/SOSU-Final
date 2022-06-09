@@ -12,6 +12,9 @@ import exam.projects.sosu_final.repositories.entities.FunctionAbilityItem
 
 class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit) :
     RecyclerView.Adapter<SingleFunctionAbilityAdapter.SingleFunctionAbilityViewHolder>() {
+
+    private var functionAbilityItems: List<FunctionAbilityItem> = listOf()
+
     inner class SingleFunctionAbilityViewHolder(val binding: SingleFunctionAbilityItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -145,27 +148,8 @@ class SingleFunctionAbilityAdapter(val listener: (FunctionAbilityItem) -> Unit) 
         return this.functionAbilityItems.size
     }
 
-    val diffCallback = object : DiffUtil.ItemCallback<FunctionAbilityItem>() {
-        override fun areItemsTheSame(
-            oldItem: FunctionAbilityItem,
-            newItem: FunctionAbilityItem
-        ): Boolean {
-            return oldItem.id === newItem.id
-        }
-
-        override fun areContentsTheSame(
-            oldItem: FunctionAbilityItem,
-            newItem: FunctionAbilityItem
-        ): Boolean {
-            return oldItem == newItem
-        }
+    fun updateList(newList: List<FunctionAbilityItem>) {
+        functionAbilityItems = newList
+        notifyDataSetChanged()
     }
-
-    private val differ = AsyncListDiffer(this, diffCallback)
-
-    var functionAbilityItems: List<FunctionAbilityItem>
-        get() = differ.currentList
-        set(value) {
-            differ.submitList(value)
-        }
 }

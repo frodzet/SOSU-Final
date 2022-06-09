@@ -94,8 +94,7 @@ class SingleFunctionAbilityActivity : AppCompatActivity() {
         subjectViewModel.getOneFunctionAbility(subjectId, functionAbilityId)
         subjectViewModel.getOneFunctionAbilityResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-                singleFunctionAbilityAdapter.functionAbilityItems =
-                    response.body()!!.functionAbilityItems
+                singleFunctionAbilityAdapter.updateList(response.body()!!.functionAbilityItems)
             } else {
                 Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
             }

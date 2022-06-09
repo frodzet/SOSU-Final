@@ -10,6 +10,9 @@ import exam.projects.sosu_final.repositories.entities.HealthCondition
 
 class HealthConditionAdapter(val listener: (HealthCondition) -> Unit) :
     RecyclerView.Adapter<HealthConditionAdapter.HealthConditionViewHolder>() {
+
+    private var healthConditions: List<HealthCondition> = listOf()
+
     inner class HealthConditionViewHolder(val binding: HealthConditionItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -41,24 +44,8 @@ class HealthConditionAdapter(val listener: (HealthCondition) -> Unit) :
         return healthConditions.size
     }
 
-    val diffCallback = object : DiffUtil.ItemCallback<HealthCondition>() {
-        override fun areItemsTheSame(oldItem: HealthCondition, newItem: HealthCondition): Boolean {
-            return oldItem.id === newItem.id
-        }
-
-        override fun areContentsTheSame(
-            oldItem: HealthCondition,
-            newItem: HealthCondition
-        ): Boolean {
-            return oldItem == newItem
-        }
+    fun updateList(newList: List<HealthCondition>) {
+        healthConditions = newList
+        notifyDataSetChanged()
     }
-
-    private val differ = AsyncListDiffer(this, diffCallback)
-
-    var healthConditions: List<HealthCondition>
-        get() = differ.currentList
-        set(value) {
-            differ.submitList(value)
-        }
 }

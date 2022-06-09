@@ -82,7 +82,7 @@ class FunctionAbilityActivity : AppCompatActivity() {
         subjectViewModel.getAllFunctionAbilities(subjectId)
         subjectViewModel.getAllFunctionAbilitiesResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-                functionAbilityAdapter.functionAbilities = response.body()!!
+                functionAbilityAdapter.updateList(response.body()!!)
             } else {
                 Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
             }

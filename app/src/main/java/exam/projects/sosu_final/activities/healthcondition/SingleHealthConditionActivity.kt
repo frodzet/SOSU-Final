@@ -91,8 +91,7 @@ class SingleHealthConditionActivity : AppCompatActivity() {
         subjectViewModel.getOneHealthCondition(subjectId, healthConditionId)
         subjectViewModel.getOneHealthConditionResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-                singleHealthConditionAdapter.healthConditionItems =
-                    response.body()?.healthConditionItems!!
+                singleHealthConditionAdapter.updateList(response.body()?.healthConditionItems!!)
             } else {
                 Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
             }

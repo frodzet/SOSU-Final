@@ -11,6 +11,9 @@ import exam.projects.sosu_final.repositories.entities.GeneralInformation
 
 class GeneralInformationAdapter(val listener: (GeneralInformation) -> Unit) :
     RecyclerView.Adapter<GeneralInformationAdapter.GeneralInformationViewHolder>() {
+
+    private var allGeneralInformation: List<GeneralInformation> = listOf()
+
     inner class GeneralInformationViewHolder(val binding: GeneralInformationItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -60,27 +63,8 @@ class GeneralInformationAdapter(val listener: (GeneralInformation) -> Unit) :
         return this.allGeneralInformation.size
     }
 
-    val diffCallback = object : DiffUtil.ItemCallback<GeneralInformation>() {
-        override fun areItemsTheSame(
-            oldItem: GeneralInformation,
-            newItem: GeneralInformation
-        ): Boolean {
-            return oldItem.id === newItem.id
-        }
-
-        override fun areContentsTheSame(
-            oldItem: GeneralInformation,
-            newItem: GeneralInformation
-        ): Boolean {
-            return oldItem == newItem
-        }
+    fun updateList(newList: List<GeneralInformation>) {
+        allGeneralInformation = newList
+        notifyDataSetChanged()
     }
-
-    private val differ = AsyncListDiffer(this, diffCallback)
-
-    var allGeneralInformation: List<GeneralInformation>
-        get() = differ.currentList
-        set(value) {
-            differ.submitList(value)
-        }
 }

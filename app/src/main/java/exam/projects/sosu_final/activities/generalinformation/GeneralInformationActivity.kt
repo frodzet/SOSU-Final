@@ -82,7 +82,7 @@ class GeneralInformationActivity : AppCompatActivity() {
         subjectViewModel.getAllGeneralInformation(subjectId)
         subjectViewModel.getAllGeneralInformationResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-                generalInformationAdapter.allGeneralInformation = response.body()!!
+                generalInformationAdapter.updateList(response.body()!!)
             } else {
                 Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
             }

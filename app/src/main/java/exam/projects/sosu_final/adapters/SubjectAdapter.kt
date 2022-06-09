@@ -12,6 +12,8 @@ import exam.projects.sosu_final.repositories.entities.Subject
 class SubjectAdapter(val listener: (Subject, Int) -> Unit) :
     RecyclerView.Adapter<SubjectAdapter.SubjectsViewHolder>() {
 
+    private var allSubjects: List<Subject> = listOf()
+
     inner class SubjectsViewHolder(val binding: SubjectAboutItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -44,21 +46,9 @@ class SubjectAdapter(val listener: (Subject, Int) -> Unit) :
         return this.allSubjects.size
     }
 
-    val diffCallback = object : DiffUtil.ItemCallback<Subject>() {
-        override fun areItemsTheSame(oldItem: Subject, newItem: Subject): Boolean {
-            return oldItem.id === newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Subject, newItem: Subject): Boolean {
-            return oldItem == newItem
-        }
+    fun updateList(newList: List<Subject>) {
+        allSubjects = newList
+        notifyDataSetChanged()
     }
 
-    private val differ = AsyncListDiffer(this, diffCallback)
-
-    var allSubjects: List<Subject>
-        get() = differ.currentList
-        set(value) {
-            differ.submitList(value)
-        }
 }

@@ -81,7 +81,7 @@ class HealthConditionActivity : AppCompatActivity() {
         subjectViewModel.getAllHealthConditions(subjectId)
         subjectViewModel.getAllHealthConditionsResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-                healthConditionAdapter.healthConditions = response.body()!!
+                healthConditionAdapter.updateList(response.body()!!)
             } else {
                 Toast.makeText(this, "No response!", Toast.LENGTH_LONG).show()
             }

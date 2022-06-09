@@ -10,6 +10,9 @@ import exam.projects.sosu_final.repositories.entities.FunctionAbility
 
 class FunctionAbilityAdapter(val listener: (FunctionAbility) -> Unit) :
     RecyclerView.Adapter<FunctionAbilityAdapter.FunctionAbilityViewHolder>() {
+
+    private var functionAbilities: List<FunctionAbility> = listOf()
+
     inner class FunctionAbilityViewHolder(val binding: FunctionAbilityItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -41,25 +44,9 @@ class FunctionAbilityAdapter(val listener: (FunctionAbility) -> Unit) :
         return functionAbilities.size
     }
 
-    val diffCallback = object : DiffUtil.ItemCallback<FunctionAbility>() {
-        override fun areItemsTheSame(oldItem: FunctionAbility, newItem: FunctionAbility): Boolean {
-            return oldItem.id === newItem.id
-        }
-
-        override fun areContentsTheSame(
-            oldItem: FunctionAbility,
-            newItem: FunctionAbility
-        ): Boolean {
-            return oldItem == newItem
-        }
+    fun updateList(newList: List<FunctionAbility>) {
+        functionAbilities = newList
+        notifyDataSetChanged()
     }
-
-    private val differ = AsyncListDiffer(this, diffCallback)
-
-    var functionAbilities: List<FunctionAbility>
-        get() = differ.currentList
-        set(value) {
-            differ.submitList(value)
-        }
 
 }

@@ -58,7 +58,7 @@ class DashboardActivity : AppCompatActivity() {
         subjectViewModel.getAllSubjects()
         subjectViewModel.getAllSubjectsResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
-                subjectsAdapter.allSubjects = response.body()!!
+                subjectsAdapter.updateList(response.body()!!)
             } else {
                 Toast.makeText(this, "Prøv igen", Toast.LENGTH_LONG).show()
             }
